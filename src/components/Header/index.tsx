@@ -39,7 +39,7 @@ const Header: FC<HeaderProps> = ({}) => {
             </ul>
 
             <Button
-              className="text-white bg-transparent focus:text-white focus:bg-transparent active:bg-transparent"
+              className="mt-6 text-white bg-transparent focus:text-white focus:bg-transparent active:bg-transparent"
               variant="outline"
             >
               Sign In
@@ -66,9 +66,15 @@ const Header: FC<HeaderProps> = ({}) => {
           </ul>
         </div>
 
-        <Button className="hidden md:block">Sign In</Button>
+        <Button
+          className="hidden md:block text-black bg-transparent border-black focus:text-black focus:bg-transparent active:bg-transparent"
+          variant="outline"
+        >
+          Sign In
+        </Button>
 
-        <Button variant='ghost'
+        <Button
+          variant="ghost"
           className="lg:hidden"
           onClick={() => {
             setIsOpen(true);
