@@ -2,15 +2,11 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "../globals.css";
 import Header from "@/components/Header";
-<<<<<<< HEAD:src/app/layout.tsx
 import HeaderTop from "@/components/Header/HeaderTop";
-import Footer from "@/components/Footer";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-=======
 import Footer from "@/components/Footer";
->>>>>>> 80041aa624c64334686318629da92a0ed3776baf:src/app/(dashboard)/layout.tsx
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -29,8 +25,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <main>
           <div>
-            <HeaderTop />
-            <Header />
+             <Header />
             
             {children}
             <Footer />

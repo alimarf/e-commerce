@@ -40,7 +40,7 @@ const Home = () => {
 
   return (
     <div>
-      <div className="container mt-10">
+      <div className="container mt-5">
         <Slider {...settings}>
           {slideData.map((item) => (
             <Slide
@@ -52,6 +52,11 @@ const Home = () => {
             />
           ))}
         </Slider>
+      </div>
+
+      <div className="container pt-10">
+        <h2 className="font-medium text-2xl pb-4">New Products</h2>
+        
       </div>
     </div>
   );
