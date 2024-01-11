@@ -10,11 +10,13 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { signInFormSchema } from "@/lib/form-schema";
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import ClipLoader from "react-spinners/ClipLoader";
 
 interface SignInPageProps {}
 
@@ -23,17 +25,22 @@ const SignInPage: FC<SignInPageProps> = ({}) => {
     resolver: zodResolver(signInFormSchema),
   });
 
-  const onSubmit = (val: z.infer<typeof signInFormSchema>) => {};
+  const router = useRouter();
+
+  const [isLoading, setIsLoading] = useState(false);
+
+  const onSubmit = async (val: z.infer<typeof signInFormSchema>) => {
+    setIsLoading(true);
+    await router.push("/");
+  };
 
   return (
     <div className="relative w-full h-screen">
       <div className="absolute -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
-        <div className="mb-2 text-4xl font-semibold text-center">
-          Grosir
-        </div>
+        <div className="mb-2 text-4xl font-semibold text-center">Grosir</div>
 
         <div className="text-sm text-gray-500">
-          Search your favorite products
+          Search your favorite products in the world
         </div>
 
         <Form {...form}>
@@ -73,7 +80,18 @@ const SignInPage: FC<SignInPageProps> = ({}) => {
               )}
             />
 
-            <Button className="w-full">Sign In</Button>
+            <Button className="w-full">
+              {isLoading ? (
+                <ClipLoader
+                  color="#ffffff"
+                  size={20}
+                  aria-label="Loading Spinner"
+                  data-testid="loader"
+                />
+              ) : (
+                "SignIn"
+              )}
+            </Button>
 
             <div className="text-sm text-center">
               Don`t have an account{" "}
