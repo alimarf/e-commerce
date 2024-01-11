@@ -28,14 +28,13 @@ const Header: FC<HeaderProps> = ({}) => {
             </Button>
             <ul className="mt-10 flex flex-col items-center justify-center text-white">
               <li className="mb-4 text-4xl">
-
-                <a href="/home">Home</a>
+                <Link href="/home">Home</Link>
               </li>
               <li className="mb-4 text-4xl">
-                <a href="/products">Products</a>
+                <Link href="/products">Products</Link>
               </li>
               <li className="mb-4 text-4xl">
-                <a href="/shopping-conditions">Shopping Conditions</a>
+                <Link href="/shopping-conditions">Shopping Conditions</Link>
               </li>
             </ul>
 
