@@ -28,6 +28,7 @@ const Header: FC<HeaderProps> = ({}) => {
             </Button>
             <ul className="mt-10 flex flex-col items-center justify-center text-white">
               <li className="mb-4 text-4xl">
+
                 <a href="/home">Home</a>
               </li>
               <li className="mb-4 text-4xl">
@@ -52,8 +53,8 @@ const Header: FC<HeaderProps> = ({}) => {
       <div className="flex justify-between flex-row items-center w-full px-4 py-6 lg:px-0 lg:py-4 lg:max-w-6xl lg:mx-auto">
         <h1 className="text-4xl font-bold">Grosir</h1>
 
-        <div className="hidden md:block">
-          <ul className="mt-10 lg:mt-0 flex flex-row items-center justify-center gap-8">
+        <div className="hidden lg:block">
+          <ul className="mt-10 lg:mt-0 flex flex-row items-center justify-center gap-16">
             <li className="text-xl">
               <a href="/home">Home</a>
             </li>
@@ -67,7 +68,7 @@ const Header: FC<HeaderProps> = ({}) => {
         </div>
 
         <Button
-          className="hidden md:block text-black bg-transparent border-black focus:text-black focus:bg-transparent active:bg-transparent"
+          className="hidden lg:block text-black bg-transparent border-black focus:text-black focus:bg-transparent active:bg-transparent"
           variant="outline"
         >
           Sign In
