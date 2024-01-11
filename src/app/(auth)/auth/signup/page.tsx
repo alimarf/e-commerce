@@ -13,7 +13,7 @@ import { signUpFormSchema } from "@/lib/form-schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Metadata } from "next";
 import Link from "next/link";
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
@@ -23,6 +23,9 @@ const SignUpPage: FC<SignUpPageProps> = ({}) => {
   const form = useForm<z.infer<typeof signUpFormSchema>>({
     resolver: zodResolver(signUpFormSchema),
   });
+
+  const [isLoading, setIsLoading] = useState(false);
+  
 
   const onSubmit = async (val: z.infer<typeof signUpFormSchema>) => {};
 

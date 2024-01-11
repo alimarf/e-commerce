@@ -4,13 +4,17 @@ import React, { FC, useState } from "react";
 import { MdMenu, MdClose } from "react-icons/md";
 import { Button } from "../ui/button";
 import Link from "next/link";
-import { cn } from "@/lib/utils";
+
 import { Separator } from "@/components/ui/separator";
+import { useRouter } from "next/navigation";
+
+import SignOutDialog from "../SignOutDialog";
 
 interface HeaderProps {}
 
 const Header: FC<HeaderProps> = ({}) => {
   const [isOpen, setIsOpen] = useState(false);
+  const router = useRouter();
 
   return (
     <div>
@@ -41,6 +45,9 @@ const Header: FC<HeaderProps> = ({}) => {
             <Button
               className="mt-6 text-white bg-transparent focus:text-white focus:bg-transparent active:bg-transparent"
               variant="outline"
+              onClick={() => {
+                router.push("/auth/signin");
+              }}
             >
               Sign In
             </Button>
@@ -66,12 +73,25 @@ const Header: FC<HeaderProps> = ({}) => {
           </ul>
         </div>
 
-        <Button
+        {/* TODO:: UNCOMMENT THIS CODE */}
+        {/* <Button
           className="hidden lg:block text-black bg-transparent border-black focus:text-black focus:bg-transparent active:bg-transparent"
           variant="outline"
+          onClick={() => {
+            router.push("/auth/signin");
+          }}
         >
           Sign In
-        </Button>
+        </Button> */}
+
+        <SignOutDialog>
+          <Button
+            className="hidden lg:block text-black bg-transparent border-black focus:text-black focus:bg-transparent active:bg-transparent"
+            variant="outline"
+          >
+            Sign Out
+          </Button>
+        </SignOutDialog>
 
         <Button
           variant="ghost"
