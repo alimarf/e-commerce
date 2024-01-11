@@ -6,8 +6,8 @@ import Slide from "@/components/Slider/Slide";
 import ProductCard from "@/components/Product/ProductCard";
 
 const Home = () => {
-  var settings = {
-    dots: true,
+  let settings = {
+    dots: false,
     infinite: true,
     slidesToShow: 1,
     slidesToScroll: 1,
@@ -93,7 +93,7 @@ const Home = () => {
   
 
   return (
-    <div>
+    <div className="flex flex-col">
       <div className="container mt-5">
         <Slider {...settings}>
           {slideData.map((item) => (
