@@ -1,4 +1,6 @@
-import React, { FC } from "react";
+"use client";
+
+import React, { FC, ReactNode } from "react";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -14,14 +16,14 @@ import {
 import { useRouter } from "next/navigation";
 
 interface SignOutDialogProps {
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
 const SignOutDialog: FC<SignOutDialogProps> = ({ children }) => {
   const router = useRouter();
   return (
     <AlertDialog>
-      <AlertDialogTrigger>{children}</AlertDialogTrigger>
+      <AlertDialogTrigger asChild>{children}</AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>Are you sure want to Sign Out?</AlertDialogTitle>
