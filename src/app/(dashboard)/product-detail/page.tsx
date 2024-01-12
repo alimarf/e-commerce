@@ -88,7 +88,6 @@ const ProductDetail: FC<ProductDetailProps> = ({ name, price, imageUrl }) => {
             </div>
 
 
-
         </div>
     );
 };
