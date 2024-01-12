@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
@@ -100,9 +101,12 @@ const ProductCard: React.FC<propsType> = ({
           </del> */}
         </div>
 
-        <div className="bg-primary text-white text-[14px] md:text-[16px] p-2 px-4 rounded-lg inline-block cursor-pointer hover:bg-blackish">
+        <Link href="/product-detail" className="bg-primary text-white text-[14px] md:text-[16px] p-2 px-4 rounded-lg inline-block cursor-pointer hover:bg-blackish">
           Order Now
-        </div>
+        </Link>
+        {/* <div className="bg-primary text-white text-[14px] md:text-[16px] p-2 px-4 rounded-lg inline-block cursor-pointer hover:bg-blackish">
+          Order Now
+        </div> */}
       </div>
     </div>
   );

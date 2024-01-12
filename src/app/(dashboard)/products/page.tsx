@@ -34,7 +34,7 @@ const Products: FC<ProductsProps> = ({ }) => {
       title: "Shirt",
       desc: "Pure Garment Dyed Cotton Shirt",
       rating: 4,
-      price: "45.00",
+      price: "450.000",
     },
     {
       img: "/sports-1.jpg",
