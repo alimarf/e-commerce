@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/alert-dialog";
 
 import { useRouter } from "next/navigation";
+import { signOut } from "next-auth/react";
 
 interface SignOutDialogProps {
   children: ReactNode;
@@ -35,7 +36,8 @@ const SignOutDialog: FC<SignOutDialogProps> = ({ children }) => {
           <AlertDialogCancel>Cancel</AlertDialogCancel>
           <AlertDialogAction
             onClick={() => {
-              router.push("/auth/signin");
+              signOut();
+              // router.push("/auth/signin");
             }}
           >
             Continue

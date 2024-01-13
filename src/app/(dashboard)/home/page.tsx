@@ -5,11 +5,9 @@ import Slider from "react-slick";
 import Slide from "@/components/Slider/Slide";
 import ProductCard from "@/components/Product/ProductCard";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import { Carousel } from 'react-responsive-carousel';
+import { Carousel } from "react-responsive-carousel";
 
 const Home = () => {
- 
-
   const productsData = [
     {
       img: "/jacket-1.jpg",
@@ -62,29 +60,20 @@ const Home = () => {
     },
   ];
 
-
   return (
     <div>
       <div className="container mt-5">
-        <Carousel
-        autoPlay
-        infiniteLoop 
-        showThumbs={false}>
+        <Carousel autoPlay infiniteLoop showThumbs={false}>
           <div>
             <img src="/banner-1.jpg" alt="image1" />
-
           </div>
           <div>
             <img src="/banner-2.jpg" alt="image2" />
-
           </div>
           <div>
             <img src="/banner-3.jpg" alt="image3" />
-
           </div>
-
         </Carousel>
-
       </div>
 
       <div className="container pt-10">

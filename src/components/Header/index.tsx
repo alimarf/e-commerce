@@ -9,12 +9,20 @@ import { Separator } from "@/components/ui/separator";
 import { useRouter } from "next/navigation";
 
 import SignOutDialog from "../SignOutDialog";
+import { useSession } from "next-auth/react";
 
 interface HeaderProps {}
 
 const Header: FC<HeaderProps> = ({}) => {
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
+
+  const { data: session } = useSession();
+  console.log(session);
+
+  // if (session === null) {
+  //   return redirect("/auth/signin");
+  // }
 
   return (
     <div>
@@ -74,24 +82,27 @@ const Header: FC<HeaderProps> = ({}) => {
         </div>
 
         {/* TODO:: UNCOMMENT THIS CODE */}
-        {/* <Button
-          className="hidden lg:block text-black bg-transparent border-black focus:text-black focus:bg-transparent active:bg-transparent"
-          variant="outline"
-          onClick={() => {
-            router.push("/auth/signin");
-          }}
-        >
-          Sign In
-        </Button> */}
 
-        <SignOutDialog>
+        {session === null ? (
           <Button
             className="hidden lg:block text-black bg-transparent border-black focus:text-black focus:bg-transparent active:bg-transparent"
             variant="outline"
+            onClick={() => {
+              router.push("/auth/signin");
+            }}
           >
-            Sign Out
+            Sign In
           </Button>
-        </SignOutDialog>
+        ) : (
+          <SignOutDialog>
+            <Button
+              className="hidden lg:block text-black bg-transparent border-black focus:text-black focus:bg-transparent active:bg-transparent"
+              variant="outline"
+            >
+              Sign Out
+            </Button>
+          </SignOutDialog>
+        )}
 
         <Button
           variant="ghost"
