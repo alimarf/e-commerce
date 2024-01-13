@@ -10,18 +10,14 @@ const ShoppingConditions: FC<ShoppingConditionsProps> = ({ }) => {
     <div className='container mx-auto px-4'>
 
       <div className='text-xl text-bold ml-10 mt-10'>How to order</div>
-      <div className="flex flex-row justify-center">
+      <div className="container mx-auto px-4">
         <Card className='m-10 max-w-50'>
           <CardHeader>
             <CardTitle>Step 1</CardTitle>
           </CardHeader>
           <CardContent>
             <p>
-              Setelah login member,
-              Customer dapat mencari
-              produk yang diinginkan
-              melalui fitur “Search” di
-              kolom atas
+              Pastikan Anda Login Terlebih dahulu sebelum order pesanan
             </p>
           </CardContent>
 
@@ -33,28 +29,19 @@ const ShoppingConditions: FC<ShoppingConditionsProps> = ({ }) => {
           </CardHeader>
           <CardContent>
             <p>
-              Setelah login member,
-              Customer dapat mencari
-              produk yang diinginkan
-              melalui fitur “Search” di
-              kolom atas
+              Setelah login,
+              silahkan klik order now pada produk yang anda inginkan
             </p>
           </CardContent>
         </Card>
-      </div>
 
-      <div className="flex flex-row justify-center">
         <Card className='m-10 max-w-50'>
           <CardHeader>
             <CardTitle>Step 3</CardTitle>
           </CardHeader>
           <CardContent>
             <p>
-              Setelah login member,
-              Customer dapat mencari
-              produk yang diinginkan
-              melalui fitur “Search” di
-              kolom atas
+              Setelah Masuk kedalam detail produk lanjutkan klik tombol order now
             </p>
           </CardContent>
 
@@ -66,81 +53,15 @@ const ShoppingConditions: FC<ShoppingConditionsProps> = ({ }) => {
           </CardHeader>
           <CardContent>
             <p>
-              Setelah login member,
-              Customer dapat mencari
-              produk yang diinginkan
-              melalui fitur “Search” di
-              kolom atas
+              Setelah klik tombol order now, anda akan di arahkan ke whatsapp 
+              dan silahkan lakukan transaksi selanjutnya
             </p>
           </CardContent>
         </Card>
       </div>
 
-      <div className="flex flex-row justify-center">
-        <Card className='m-10 max-w-50'>
-          <CardHeader>
-            <CardTitle>Step 6</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p>
-              Setelah login member,
-              Customer dapat mencari
-              produk yang diinginkan
-              melalui fitur “Search” di
-              kolom atas
-            </p>
-          </CardContent>
-
-        </Card>
-
-        <Card className='m-10 max-w-50'>
-          <CardHeader>
-            <CardTitle>Step 6</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p>
-              Setelah login member,
-              Customer dapat mencari
-              produk yang diinginkan
-              melalui fitur “Search” di
-              kolom atas
-            </p>
-          </CardContent>
-        </Card>
-      </div>
-
-      <div className="flex flex-row justify-center">
-        <Card className='m-10 max-w-50'>
-          <CardHeader>
-            <CardTitle>Step 8</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p>
-              Setelah login member,
-              Customer dapat mencari
-              produk yang diinginkan
-              melalui fitur “Search” di
-              kolom atas
-            </p>
-          </CardContent>
-
-        </Card>
-
-        <Card className='m-10 max-w-50'>
-          <CardHeader>
-            <CardTitle>Step 8</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p>
-              Setelah login member,
-              Customer dapat mencari
-              produk yang diinginkan
-              melalui fitur “Search” di
-              kolom atas
-            </p>
-          </CardContent>
-        </Card>
-      </div>
+     
+      
 
 
     </div>

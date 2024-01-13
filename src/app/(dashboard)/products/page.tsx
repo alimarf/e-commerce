@@ -1,12 +1,16 @@
+"use client"
+
 import React, { FC } from 'react'
 import ProductCard from '@/components/Product/ProductCard';
 import { BsSearch } from "react-icons/bs";
+import { useSession } from 'next-auth/react';
 
 interface ProductsProps {
 
 }
 
 const Products: FC<ProductsProps> = ({ }) => {
+  const { data: session } = useSession();
   const productsData = [
     {
       img: "/jacket-1.jpg",

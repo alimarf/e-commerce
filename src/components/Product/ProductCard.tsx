@@ -1,3 +1,4 @@
+import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -19,7 +20,9 @@ const ProductCard: React.FC<propsType> = ({
   rating,
   price,
 }) => {
+  const { data: session } = useSession();
   const generateRating = (rating: number) => {
+
     switch (rating) {
       case 1:
         return (
@@ -101,9 +104,25 @@ const ProductCard: React.FC<propsType> = ({
           </del> */}
         </div>
 
-        <Link href="/product-detail" className="bg-primary text-white text-[14px] md:text-[16px] p-2 px-4 rounded-lg inline-block cursor-pointer hover:bg-blackish">
+        {/* <Link href="/product-detail" className="bg-primary text-white text-[14px] md:text-[16px] p-2 px-4 rounded-lg inline-block cursor-pointer hover:bg-blackish">
           Order Now
-        </Link>
+        </Link> */}
+
+        {session === null ? (
+          <Link href="/auth/signin" className="bg-primary text-white text-[14px] md:text-[16px] p-2 px-4 rounded-lg inline-block cursor-pointer hover:bg-blackish">
+            Order Now
+          </Link>
+        ) : 
+          (
+            <Link href="/product-detail" className="bg-primary text-white text-[14px] md:text-[16px] p-2 px-4 rounded-lg inline-block cursor-pointer hover:bg-blackish">
+            Order Now
+          </Link>
+          )
+        }
+
+
+
+
         {/* <div className="bg-primary text-white text-[14px] md:text-[16px] p-2 px-4 rounded-lg inline-block cursor-pointer hover:bg-blackish">
           Order Now
         </div> */}
