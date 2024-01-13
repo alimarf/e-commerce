@@ -17,6 +17,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { FC, useState } from "react";
 import { useForm } from "react-hook-form";
+import ClipLoader from "react-spinners/ClipLoader";
 import { z } from "zod";
 
 
@@ -35,6 +36,7 @@ const SignUpPage: FC<SignUpPageProps> = ({}) => {
   
   const onSubmit = async (val: z.infer<typeof signUpFormSchema>) => {
     try {
+      setIsLoading(true);
       await fetch("/api/sign-up", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -43,6 +45,7 @@ const SignUpPage: FC<SignUpPageProps> = ({}) => {
 
       await router.push("/auth/signin");
     } catch (error) {
+      setIsLoading(false);
       toast({
         title: "Error",
         description: "Please Try Again",
@@ -110,7 +113,19 @@ const SignUpPage: FC<SignUpPageProps> = ({}) => {
               )}
             />
 
-            <Button className="w-full">Sign Up</Button>
+            
+            <Button className="w-full">
+              {isLoading ? (
+                <ClipLoader
+                  color="#ffffff"
+                  size={20}
+                  aria-label="Loading Spinner"
+                  data-testid="loader"
+                />
+              ) : (
+                "Sign Up"
+              )}
+            </Button>
 
             <div className="text-sm text-center">
               Already have an account{" "}

@@ -65,7 +65,7 @@ const Header: FC<HeaderProps> = ({}) => {
 
       {/* WEB */}
       <div className="flex justify-between flex-row items-center w-full px-4 py-6 lg:px-0 lg:py-4 lg:max-w-6xl lg:mx-auto">
-        <h1 className="text-4xl font-bold">Grosir</h1>
+        <h1 className="text-4xl font-bold">Zivana Store</h1>
 
         <div className="hidden lg:block">
           <ul className="mt-10 lg:mt-0 flex flex-row items-center justify-center gap-16">
