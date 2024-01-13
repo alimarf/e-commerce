@@ -28,8 +28,8 @@ const Header: FC<HeaderProps> = ({}) => {
     <div>
       {/* MOBILE */}
       {isOpen && (
-        <div className="absolute w-full bg-black pb-6">
-          <div className="flex flex-col items-center text-2xl px-6">
+        <div className="absolute w-full bg-black pb-6 z-10">
+          <div className="flex flex-col  text-2xl px-6">
             <Button
               variant={"ghost"}
               onClick={() => {
@@ -38,14 +38,14 @@ const Header: FC<HeaderProps> = ({}) => {
             >
               <MdClose className="text-white w-10 h-10 absolute right-6 top-6" />
             </Button>
-            <ul className="mt-10 flex flex-col items-center justify-center text-white">
-              <li className="mb-4 text-4xl">
+            <ul className="mt-10 flex flex-col text-white">
+              <li className="mb-4">
                 <Link href="/home">Home</Link>
               </li>
-              <li className="mb-4 text-4xl">
+              <li className="mb-4">
                 <Link href="/products">Products</Link>
               </li>
-              <li className="mb-4 text-4xl">
+              <li className="mb-4">
                 <Link href="/shopping-conditions">Shopping Conditions</Link>
               </li>
             </ul>
