@@ -1,12 +1,10 @@
-import React, { FC } from 'react'
-import ProductCard from '@/components/Product/ProductCard';
+import React, { FC } from "react";
+import ProductCard from "@/components/Product/ProductCard";
 import { BsSearch } from "react-icons/bs";
 
-interface ProductsProps {
+interface ProductsProps {}
 
-}
-
-const Products: FC<ProductsProps> = ({ }) => {
+const Products: FC<ProductsProps> = ({}) => {
   const productsData = [
     {
       img: "/jacket-1.jpg",
@@ -91,7 +89,7 @@ const Products: FC<ProductsProps> = ({ }) => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default Products;
