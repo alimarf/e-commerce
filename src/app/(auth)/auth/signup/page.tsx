@@ -16,10 +16,14 @@ import Link from "next/link";
 import React, { FC, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { useRouter } from "next/navigation";
+import { toast } from "@/components/ui/use-toast";
 
 interface SignUpPageProps {}
 
 const SignUpPage: FC<SignUpPageProps> = ({}) => {
+  const router = useRouter();
+
   const form = useForm<z.infer<typeof signUpFormSchema>>({
     resolver: zodResolver(signUpFormSchema),
   });
@@ -27,7 +31,24 @@ const SignUpPage: FC<SignUpPageProps> = ({}) => {
   const [isLoading, setIsLoading] = useState(false);
   
 
-  const onSubmit = async (val: z.infer<typeof signUpFormSchema>) => {};
+  const onSubmit = async (val: z.infer<typeof signUpFormSchema>) => {
+    try {
+      await fetch("api/sign-up", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(val),
+      });
+      console.log(val);
+      
+      //await router.push("/auth/signin");
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Please Try Again",
+      });
+      console.log(error);
+    }
+  };
 
   return (
     <div className="relative w-full h-screen">
