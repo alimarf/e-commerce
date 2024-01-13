@@ -9,10 +9,12 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { toast } from "@/components/ui/use-toast";
 import { signUpFormSchema } from "@/lib/form-schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Metadata } from "next";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React, { FC, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -25,9 +27,26 @@ const SignUpPage: FC<SignUpPageProps> = ({}) => {
   });
 
   const [isLoading, setIsLoading] = useState(false);
-  
 
-  const onSubmit = async (val: z.infer<typeof signUpFormSchema>) => {};
+  const router = useRouter();
+  
+  const onSubmit = async (val: z.infer<typeof signUpFormSchema>) => {
+    try {
+      await fetch("/api/sign-up", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(val),
+      });
+
+      await router.push("/auth/signin");
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Please Try Again",
+      });
+      console.log(error);
+    }
+  };
 
   return (
     <div className="relative w-full h-screen">
