@@ -9,15 +9,16 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { toast } from "@/components/ui/use-toast";
 import { signUpFormSchema } from "@/lib/form-schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Metadata } from "next";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React, { FC, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { useRouter } from "next/navigation";
-import { toast } from "@/components/ui/use-toast";
+
 
 interface SignUpPageProps {}
 
@@ -29,18 +30,18 @@ const SignUpPage: FC<SignUpPageProps> = ({}) => {
   });
 
   const [isLoading, setIsLoading] = useState(false);
-  
 
+
+  
   const onSubmit = async (val: z.infer<typeof signUpFormSchema>) => {
     try {
-      await fetch("api/sign-up", {
+      await fetch("/api/sign-up", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(val),
       });
-      console.log(val);
-      
-      //await router.push("/auth/signin");
+
+      await router.push("/auth/signin");
     } catch (error) {
       toast({
         title: "Error",
