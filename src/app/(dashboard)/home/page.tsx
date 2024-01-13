@@ -6,8 +6,10 @@ import Slide from "@/components/Slider/Slide";
 import ProductCard from "@/components/Product/ProductCard";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
+import { useSession } from "next-auth/react";
 
 const Home = () => {
+  const { data: session } = useSession();
   const productsData = [
     {
       img: "/jacket-1.jpg",
