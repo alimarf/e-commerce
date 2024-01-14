@@ -9,7 +9,6 @@ import { Carousel } from "react-responsive-carousel";
 import { useSession } from "next-auth/react";
 
 const Home = () => {
-  const { data: session } = useSession();
   const productsData = [
     {
       img: "/jacket-1.jpg",

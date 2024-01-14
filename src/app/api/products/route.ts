@@ -1,16 +1,17 @@
 import { NextResponse } from "next/server";
 import prisma from "../../../../lib/prisma";
 import multer from "multer";
-import fs from "fs/promises";
+import fs, { writeFile } from "fs/promises";
 import path from "path";
 import { zfd } from "zod-form-data";
 import { z } from "zod";
+import { NextApiRequest, NextApiResponse } from 'next';
 
-const upload = multer({
-  dest: "public/images/", // Destination folder for storing the uploaded files
-});
+
+
 
 export async function POST(request: Request) {
+ 
   try {
     const formData = await request.formData();
 
@@ -19,9 +20,10 @@ export async function POST(request: Request) {
       description: zfd.text(),
       price: zfd.numeric(z.number()),
       rating: zfd.numeric(z.number().min(1).max(5)),
+      image: zfd.file()
     });
 
-    const { name, description, price, rating } = schema.parse(await formData);
+    const { name, description, price, rating, image } = schema.parse(await formData);
 
     const result = await prisma.product.create({
       data: {
@@ -29,9 +31,17 @@ export async function POST(request: Request) {
         description: description,
         price: price,
         rating: rating,
-        image: "test",
+        image: path.join("public/images", image.name),
       },
     });
+
+   //code for file 
+   const file: File | null = formData.get('image') as unknown as File;
+   const bytes = await file.arrayBuffer();
+   const buffer = Buffer.from(bytes);
+   const paths = path.join("public/images", image.name)
+   await writeFile(paths, buffer);
+    
 
     return NextResponse.json({
       status: 201,
@@ -41,7 +51,7 @@ export async function POST(request: Request) {
         description: result.description,
         price: result.price,
         rating: result.rating,
-        image: "dadad",
+        image: paths,
       },
     });
   } catch (error) {
