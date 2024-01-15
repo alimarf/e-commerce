@@ -1,19 +1,22 @@
-"use client"
+"use client";
 
-import React, { FC } from 'react'
-import ProductCard from '@/components/Product/ProductCard';
+import React, { FC } from "react";
+import ProductCard from "@/components/Product/ProductCard";
 import { BsSearch } from "react-icons/bs";
-import { useSession } from 'next-auth/react';
-import { Product } from '@prisma/client';
+import { useSession } from "next-auth/react";
+import { Product } from "@prisma/client";
+import useSWR from "swr";
+import { fetcher } from "@/lib/utils";
 
-interface ProductsProps {
+interface ProductsProps {}
 
-}
+const Products: FC<ProductsProps> = ({}) => {
+  const { data, error, isLoading } = useSWR<Product[]>(
+    "/api/products",
+    fetcher
+  );
 
-const Products: FC<ProductsProps> = ({ }) => {
-  // const { data } = useSWR<Product[]>("/api/products", fetcher);
-  // console.log(data);
-  
+  console.log("PRODUCT", data);
 
   const productsData = [
     {
@@ -86,24 +89,20 @@ const Products: FC<ProductsProps> = ({ }) => {
       <div className="container pt-10">
         <h2 className="font-medium text-2xl pb-4">All Products</h2>
         <div className="grid grid-cols-1 place-items-center sm:place-items-start sm:grid-cols-2 lg:grid-col-3 xl:grid-cols-4 gap-10 xl:gap-x-20 xl:gap-y-10 mb-10">
-          {productsData.map((item, index) => (
+          {data?.map((item: Product, index) => (
             <ProductCard
               key={index}
-              img={item.img}
-              title={item.title}
-              desc={item.desc}
-              rating={item.rating}
-              price={item.price}
+              img={item?.image || ""}
+              title={item?.name || ""}
+              desc={item?.description || ""}
+              rating={item?.rating || 0}
+              price={item?.price?.toString() || ""}
             />
           ))}
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default Products;
-
-function useSWR<T>(arg0: string, fetcher: any): { data: any; } {
-  throw new Error('Function not implemented.');
-}
