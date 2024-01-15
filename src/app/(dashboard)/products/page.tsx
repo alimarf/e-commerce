@@ -4,13 +4,17 @@ import React, { FC } from 'react'
 import ProductCard from '@/components/Product/ProductCard';
 import { BsSearch } from "react-icons/bs";
 import { useSession } from 'next-auth/react';
+import { Product } from '@prisma/client';
 
 interface ProductsProps {
 
 }
 
 const Products: FC<ProductsProps> = ({ }) => {
-  const { data: session } = useSession();
+  // const { data } = useSWR<Product[]>("/api/products", fetcher);
+  // console.log(data);
+  
+
   const productsData = [
     {
       img: "/jacket-1.jpg",
@@ -99,3 +103,7 @@ const Products: FC<ProductsProps> = ({ }) => {
 }
 
 export default Products;
+
+function useSWR<T>(arg0: string, fetcher: any): { data: any; } {
+  throw new Error('Function not implemented.');
+}
