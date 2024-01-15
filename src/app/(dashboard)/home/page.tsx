@@ -21,9 +21,9 @@ interface Product {
 }
 
 const Home = () => {
-  const { data: productsData1, error } = useSWR("/api/products", fetcher);
+  const { data: productsData, error } = useSWR("/api/products", fetcher);
 
-  console.log("data", productsData1);
+  console.log("data", productsData);
 
   return (
     <div>
@@ -46,13 +46,13 @@ const Home = () => {
         <div className="grid grid-cols-1 place-items-center sm:place-items-start sm:grid-cols-2 lg:grid-col-3 xl:grid-cols-4 gap-10 xl:gap-x-20 xl:gap-y-10 mb-10">
           {error ? (
             <p>Error loading products</p>
-          ) : !productsData1 || !productsData1.data ? (
+          ) : !productsData || !productsData.data ? (
             <p>Loading...</p>
           ) : (
-            productsData1.data.map((item: Product) => (
+            productsData.data.map((item: Product) => (
               <ProductCard
                 key={item.id}
-                img={""}
+                img={item.image}
                 title={item.name}
                 desc={item.description}
                 rating={item.rating}
