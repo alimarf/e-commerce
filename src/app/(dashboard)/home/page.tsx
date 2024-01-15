@@ -52,6 +52,7 @@ const Home = () => {
             productsData.data.map((item: Product) => (
               <ProductCard
                 key={item.id}
+                id={item.id}
                 img={item.image}
                 title={item.name}
                 desc={item.description}

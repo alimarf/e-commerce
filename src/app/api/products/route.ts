@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import prisma from "../../../../lib/prisma";
 import multer from "multer";
 import fs, { writeFile } from "fs/promises";
@@ -63,15 +63,35 @@ export async function POST(request: Request) {
 }
 
 // READ Data Products
-export async function GET(request: NextApiRequest, response: NextApiResponse) {
+export async function GET(request: NextRequest, response: NextApiResponse) {
   try {
-    const products = await prisma.product.findMany();
+    const search = request.nextUrl.searchParams.get("search");
 
-    return NextResponse.json({
-      status: 200,
-      message: "Products successfully retrieved",
-      data: products,
-    });
+    if (search) {
+      const searchResults = await prisma.product.findMany({
+        where: {
+          OR: [
+            { name: { contains: search as string } },
+            { description: { contains: search as string } },
+          ],
+        },
+      });
+
+      return NextResponse.json({
+        status: 200,
+        message: "Search results successfully retrieved",
+        data: searchResults,
+      });
+    } else {
+      // If no search query is provided, retrieve all products
+      const products = await prisma.product.findMany();
+
+      return NextResponse.json({
+        status: 200,
+        message: "Products successfully retrieved",
+        data: products,
+      });
+    }
   } catch (error) {
     console.error("Failed to retrieve products:", error);
 

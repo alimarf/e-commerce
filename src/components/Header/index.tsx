@@ -20,10 +20,6 @@ const Header: FC<HeaderProps> = ({}) => {
   const { data: session } = useSession();
   console.log(session);
 
-  // if (session === null) {
-  //   return redirect("/auth/signin");
-  // }
-
   return (
     <div>
       {/* MOBILE */}
@@ -40,13 +36,34 @@ const Header: FC<HeaderProps> = ({}) => {
             </Button>
             <ul className="mt-10 flex flex-col text-white">
               <li className="mb-4">
-                <Link href="/home">Home</Link>
+                <Link
+                  onClick={() => {
+                    setIsOpen(false);
+                  }}
+                  href="/home"
+                >
+                  Home
+                </Link>
               </li>
               <li className="mb-4">
-                <Link href="/products">Products</Link>
+                <Link
+                  onClick={() => {
+                    setIsOpen(false);
+                  }}
+                  href="/products"
+                >
+                  Products
+                </Link>
               </li>
               <li className="mb-4">
-                <Link href="/shopping-conditions">Shopping Conditions</Link>
+                <Link
+                  onClick={() => {
+                    setIsOpen(false);
+                  }}
+                  href="/shopping-conditions"
+                >
+                  Shopping Conditions
+                </Link>
               </li>
             </ul>
 

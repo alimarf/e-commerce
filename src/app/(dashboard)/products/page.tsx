@@ -1,10 +1,11 @@
 "use client";
 
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import ProductCard from "@/components/Product/ProductCard";
 import { BsSearch } from "react-icons/bs";
 import { useSession } from "next-auth/react";
 import useSWR from "swr";
+
 import { fetcher } from "@/lib/utils";
 
 interface ProductsProps {}
@@ -20,34 +21,51 @@ interface Product {
 }
 
 const Products: FC<ProductsProps> = ({}) => {
+  const [searchInput, setSearchInput] = useState("");
   const {
     data: product,
     error,
     isLoading,
-  } = useSWR("/api/products", fetcher);
+    mutate,
+  } = useSWR(`/api/products?search=${searchInput}`, fetcher);
 
-  console.log("PRODUCT", product);
+  const handleInputChange = (event: {
+    target: { value: React.SetStateAction<string> };
+  }) => {
+    setSearchInput(event.target.value);
+  };
+
+  const handleSubmit = async (event: { preventDefault: () => void }) => {
+    event.preventDefault();
+    console.log("Search Input:", searchInput);
+
+    mutate(`/api/products?search=${searchInput}`);
+  };
 
   return (
     <div>
       <div className="container pt-5">
         <div className="w-full sm:w-[300px] md:w-[100%] relative">
-          <input
-            className="border-gray-200 border p-2 px-4 rounded-lg w-full"
-            type="text"
-            placeholder="Enter any product name..."
-          />
-
-          <BsSearch
-            className="absolute right-0 top-0 mr-3 mt-3 text-gray-400"
-            size={20}
-          />
+          <form onSubmit={handleSubmit} className="relative">
+            <input
+              className="border-gray-200 border p-2 px-4 rounded-lg w-full"
+              type="text"
+              placeholder="Enter any product name..."
+              value={searchInput}
+              onChange={handleInputChange}
+            />
+            <BsSearch
+              className="absolute right-0 top-0 mr-3 mt-3 text-gray-400 cursor-pointer"
+              size={20}
+              onClick={handleSubmit}
+            />
+          </form>
         </div>
       </div>
       <div className="container pt-10">
         <h2 className="font-medium text-2xl pb-4">All Products</h2>
         <div className="grid grid-cols-1 place-items-center sm:place-items-start sm:grid-cols-2 lg:grid-col-3 xl:grid-cols-4 gap-10 xl:gap-x-20 xl:gap-y-10 mb-10">
-        {error ? (
+          {error ? (
             <p>Error loading products</p>
           ) : !product || !product.data ? (
             <p>Loading...</p>
@@ -55,6 +73,7 @@ const Products: FC<ProductsProps> = ({}) => {
             product.data.map((item: Product) => (
               <ProductCard
                 key={item.id}
+                id={item.id}
                 img={item.image}
                 title={item.name}
                 desc={item.description}

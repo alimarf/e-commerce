@@ -1,6 +1,7 @@
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
@@ -11,6 +12,7 @@ interface propsType {
   desc: string;
   rating: number;
   price: string;
+  id: string;
 }
 
 const ProductCard: React.FC<propsType> = ({
@@ -19,10 +21,11 @@ const ProductCard: React.FC<propsType> = ({
   desc,
   rating,
   price,
+  id,
 }) => {
   const { data: session } = useSession();
+  const router = useRouter();
   const generateRating = (rating: number) => {
-
     switch (rating) {
       case 1:
         return (
@@ -109,20 +112,23 @@ const ProductCard: React.FC<propsType> = ({
         </Link> */}
 
         {session === null ? (
-          <Link href="/auth/signin" className="bg-primary text-white text-[14px] md:text-[16px] p-2 px-4 rounded-lg inline-block cursor-pointer hover:bg-blackish">
+          <Link
+            href="/auth/signin"
+            className="bg-primary text-white text-[14px] md:text-[16px] p-2 px-4 rounded-lg inline-block cursor-pointer hover:bg-blackish"
+          >
             Order Now
           </Link>
-        ) :
-          (
-            <Link href="/product-detail" className="bg-primary text-white text-[14px] md:text-[16px] p-2 px-4 rounded-lg inline-block cursor-pointer hover:bg-blackish">
-              Order Now
-            </Link>
-          )
-        }
-
-
-
-
+        ) : (
+          <button
+            // onClick={() => router.push("/product-detail")}
+            onClick={() => {
+              router.push(`/product-detail/${id}`)
+            }}
+            className="bg-primary text-white text-[14px] md:text-[16px] p-2 px-4 rounded-lg inline-block cursor-pointer hover:bg-blackish"
+          >
+            Order Now
+          </button>
+        )}
         {/* <div className="bg-primary text-white text-[14px] md:text-[16px] p-2 px-4 rounded-lg inline-block cursor-pointer hover:bg-blackish">
           Order Now
         </div> */}

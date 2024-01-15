@@ -23,4 +23,12 @@ export const comparePassword = async (
 
 export const fetcher = (url: string | URL | Request) => fetch(url).then((res) => res.json());
 
+export function formatRupiah(amount: number) {
+  const formatter = new Intl.NumberFormat('id-ID', {
+    style: 'currency',
+    currency: 'IDR',
+    minimumFractionDigits: 0,
+  });
 
+  return formatter.format(amount);
+}
