@@ -30,7 +30,7 @@ export async function POST(request: Request) {
         description: description,
         price: price,
         rating: rating,
-        image: path.join("public/images", image.name),
+        image: "images/" + image.name,
       },
     });
 
@@ -49,7 +49,7 @@ export async function POST(request: Request) {
         description: result.description,
         price: result.price,
         rating: result.rating,
-        image: paths,
+        image: "/images/" + image.name,
       },
     });
   } catch (error) {

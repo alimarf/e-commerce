@@ -85,7 +85,7 @@ const ProductCard: React.FC<propsType> = ({
       <div>
         <Image
           className="w-full h-auto"
-          src={img}
+          src={`/${img}`}
           width={200}
           height={300}
           alt={title}
@@ -112,11 +112,11 @@ const ProductCard: React.FC<propsType> = ({
           <Link href="/auth/signin" className="bg-primary text-white text-[14px] md:text-[16px] p-2 px-4 rounded-lg inline-block cursor-pointer hover:bg-blackish">
             Order Now
           </Link>
-        ) : 
+        ) :
           (
             <Link href="/product-detail" className="bg-primary text-white text-[14px] md:text-[16px] p-2 px-4 rounded-lg inline-block cursor-pointer hover:bg-blackish">
-            Order Now
-          </Link>
+              Order Now
+            </Link>
           )
         }
 
