@@ -4,71 +4,29 @@ import React, { FC } from "react";
 import ProductCard from "@/components/Product/ProductCard";
 import { BsSearch } from "react-icons/bs";
 import { useSession } from "next-auth/react";
-import { Product } from "@prisma/client";
 import useSWR from "swr";
 import { fetcher } from "@/lib/utils";
 
 interface ProductsProps {}
 
+interface Product {
+  id: string;
+  createdAt: string;
+  name: string;
+  description: string;
+  price: number;
+  rating: number;
+  image: string;
+}
+
 const Products: FC<ProductsProps> = ({}) => {
-  const { data, error, isLoading } = useSWR<Product[]>(
-    "/api/products",
-    fetcher
-  );
+  const {
+    data: product,
+    error,
+    isLoading,
+  } = useSWR("/api/products", fetcher);
 
-  console.log("PRODUCT", data);
-
-  const productsData = [
-    {
-      img: "/jacket-1.jpg",
-      title: "Jacket",
-      desc: "MEN Yarn Fleece Full-Zip Jacket",
-      rating: 4,
-      price: "900.000",
-    },
-    {
-      img: "/skirt-1.jpg",
-      title: "Skirt",
-      desc: "Black Floral Wrap Midi Skirt",
-      rating: 5,
-      price: "300.000",
-    },
-    {
-      img: "/party-wear-1.jpg",
-      title: "Party Wear",
-      desc: "Women's Party Wear Shoes",
-      rating: 3,
-      price: "250.000",
-    },
-    {
-      img: "/shirt-1.jpg",
-      title: "Shirt",
-      desc: "Pure Garment Dyed Cotton Shirt",
-      rating: 4,
-      price: "450.000",
-    },
-    {
-      img: "/sports-1.jpg",
-      title: "Sports",
-      desc: "Trekking & Running Shoes - Black",
-      rating: 3,
-      price: "58.000",
-    },
-    {
-      img: "/watch-1.jpg",
-      title: "Watches",
-      desc: "Smart Watches Vital Plus",
-      rating: 4,
-      price: "100.000",
-    },
-    {
-      img: "/watch-2.jpg",
-      title: "Watches",
-      desc: "Pocket Watch Leather Pouch",
-      rating: 4,
-      price: "120.000",
-    },
-  ];
+  console.log("PRODUCT", product);
 
   return (
     <div>
@@ -89,16 +47,22 @@ const Products: FC<ProductsProps> = ({}) => {
       <div className="container pt-10">
         <h2 className="font-medium text-2xl pb-4">All Products</h2>
         <div className="grid grid-cols-1 place-items-center sm:place-items-start sm:grid-cols-2 lg:grid-col-3 xl:grid-cols-4 gap-10 xl:gap-x-20 xl:gap-y-10 mb-10">
-          {data?.map((item: Product, index) => (
-            <ProductCard
-              key={index}
-              img={item?.image || ""}
-              title={item?.name || ""}
-              desc={item?.description || ""}
-              rating={item?.rating || 0}
-              price={item?.price?.toString() || ""}
-            />
-          ))}
+        {error ? (
+            <p>Error loading products</p>
+          ) : !product || !product.data ? (
+            <p>Loading...</p>
+          ) : (
+            product.data.map((item: Product) => (
+              <ProductCard
+                key={item.id}
+                img={item.image}
+                title={item.name}
+                desc={item.description}
+                rating={item.rating}
+                price={item.price.toString()}
+              />
+            ))
+          )}
         </div>
       </div>
     </div>

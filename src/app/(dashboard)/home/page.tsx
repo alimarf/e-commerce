@@ -10,6 +10,16 @@ import { useSession } from "next-auth/react";
 import useSWR from "swr";
 import { fetcher } from "@/lib/utils";
 
+interface Product {
+  id: string;
+  createdAt: string;
+  name: string;
+  description: string;
+  price: number;
+  rating: number;
+  image: string;
+}
+
 const Home = () => {
   const { data: productsData1, error } = useSWR("/api/products", fetcher);
 
@@ -86,16 +96,22 @@ const Home = () => {
       <div className="container pt-10">
         <h2 className="font-medium text-2xl pb-4">New Products</h2>
         <div className="grid grid-cols-1 place-items-center sm:place-items-start sm:grid-cols-2 lg:grid-col-3 xl:grid-cols-4 gap-10 xl:gap-x-20 xl:gap-y-10 mb-10">
-          {productsData.map((item, index) => (
-            <ProductCard
-              key={index}
-              img={item.img}
-              title={item.title}
-              desc={item.desc}
-              rating={item.rating}
-              price={item.price}
-            />
-          ))}
+          {error ? (
+            <p>Error loading products</p>
+          ) : !productsData1 || !productsData1.data ? (
+            <p>Loading...</p>
+          ) : (
+            productsData1.data.map((item: Product) => (
+              <ProductCard
+                key={item.id}
+                img={""}
+                title={item.name}
+                desc={item.description}
+                rating={item.rating}
+                price={item.price.toString()}
+              />
+            ))
+          )}
         </div>
       </div>
     </div>

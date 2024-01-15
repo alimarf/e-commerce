@@ -85,7 +85,7 @@ const ProductCard: React.FC<propsType> = ({
       <div>
         <Image
           className="w-full h-auto"
-          src={img}
+          src={`${img}`}
           width={200}
           height={300}
           alt={title}
