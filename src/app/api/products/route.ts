@@ -5,13 +5,10 @@ import fs, { writeFile } from "fs/promises";
 import path from "path";
 import { zfd } from "zod-form-data";
 import { z } from "zod";
-import { NextApiRequest, NextApiResponse } from 'next';
-
-
+import { NextApiRequest, NextApiResponse } from "next";
 
 //Create Data Products
 export async function POST(request: Request) {
- 
   try {
     const formData = await request.formData();
 
@@ -20,10 +17,12 @@ export async function POST(request: Request) {
       description: zfd.text(),
       price: zfd.numeric(z.number()),
       rating: zfd.numeric(z.number().min(1).max(5)),
-      image: zfd.file()
+      image: zfd.file(),
     });
 
-    const { name, description, price, rating, image } = schema.parse(await formData);
+    const { name, description, price, rating, image } = schema.parse(
+      await formData
+    );
 
     const result = await prisma.product.create({
       data: {
@@ -35,13 +34,12 @@ export async function POST(request: Request) {
       },
     });
 
-   //code for file 
-   const file: File | null = formData.get('image') as unknown as File;
-   const bytes = await file.arrayBuffer();
-   const buffer = Buffer.from(bytes);
-   const paths = path.join("public/images", image.name)
-   await writeFile(paths, buffer);
-    
+    //code for file
+    const file: File | null = formData.get("image") as unknown as File;
+    const bytes = await file.arrayBuffer();
+    const buffer = Buffer.from(bytes);
+    const paths = path.join("public/images", image.name);
+    await writeFile(paths, buffer);
 
     return NextResponse.json({
       status: 201,
@@ -64,7 +62,6 @@ export async function POST(request: Request) {
   }
 }
 
-
 // READ Data Products
 export async function GET(request: NextApiRequest, response: NextApiResponse) {
   try {
@@ -85,12 +82,11 @@ export async function GET(request: NextApiRequest, response: NextApiResponse) {
   }
 }
 
-
 //UPDATE Data Product --> masih error
-export async function PUT(request: Request,req: NextApiRequest, res: NextApiResponse) {
+export async function PUT(request: Request) {
   try {
-    const productId = req.query.id; // Assuming you have the product ID in the URL
     const formData = await request.formData();
+    const productId = formData.get("id");
 
     const product = await prisma.product.findUnique({
       where: {
@@ -110,10 +106,12 @@ export async function PUT(request: Request,req: NextApiRequest, res: NextApiResp
       description: zfd.text(),
       price: zfd.numeric(z.number()),
       rating: zfd.numeric(z.number().min(1).max(5)),
-      image: zfd.file()
+      image: zfd.file(),
     });
 
-    const { name, description, price, rating, image } = schema.parse(await formData);
+    const { name, description, price, rating, image } = schema.parse(
+      await formData
+    );
 
     const updatedProduct = await prisma.product.update({
       where: {
@@ -128,9 +126,8 @@ export async function PUT(request: Request,req: NextApiRequest, res: NextApiResp
       },
     });
 
-    // Update code for file if image is provided
     if (image) {
-      const file: File | null = formData.get('image') as unknown as File;
+      const file: File | null = formData.get("image") as unknown as File;
       const bytes = await file.arrayBuffer();
       const buffer = Buffer.from(bytes);
       const imagePath = path.join("public/images", image.name);
@@ -152,34 +149,24 @@ export async function PUT(request: Request,req: NextApiRequest, res: NextApiResp
   }
 }
 
-//DELETE Data Product --> Masih Error
-export async function DELETE(request: NextApiRequest, response: NextApiResponse) {
+export async function DELETE(request: Request) {
   try {
-    const productId = request.query.id; // Assuming you have the product ID in the URL
+    const formData = await request.formData();
 
- 
-    
-    const product = await prisma.product.findUnique({
-      where: {
-        id: Number(productId).toString(),
-      },
-    });
+    const productId = formData.get("id");
 
-    if (!product) {
+    if (!productId) {
       return NextResponse.json({
         status: 404,
         message: "Product not found",
       });
     }
 
-    // Delete the product
     await prisma.product.delete({
       where: {
-        id: Number(productId).toString(),
+        id: productId?.toString(),
       },
     });
-
-    // Optionally, you can delete associated files (e.g., images) here
 
     return NextResponse.json({
       status: 200,
@@ -187,11 +174,10 @@ export async function DELETE(request: NextApiRequest, response: NextApiResponse)
     });
   } catch (error) {
     console.error("Product deletion failed:", error);
-    
+
     return NextResponse.json({
       status: 500,
       message: "Internal Server Error",
-     
     });
   }
 }
