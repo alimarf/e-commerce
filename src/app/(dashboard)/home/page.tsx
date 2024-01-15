@@ -8,8 +8,9 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
 import { useSession } from "next-auth/react";
 import useSWR from "swr";
+import { fetcher } from "@/lib/utils";
 
-const fetcher = (url: string | URL | Request) => fetch(url).then((res) => res.json());
+
 
 const Home = () => {
 
@@ -17,7 +18,6 @@ const Home = () => {
 
   console.log("data",productsData1);
   
-
 
 
   const productsData = [
@@ -101,6 +101,8 @@ const Home = () => {
               price={item.price}
             />
           ))}
+          
+          
         </div>
       </div>
     </div>
