@@ -1,4 +1,3 @@
-// pages/ProductDetail.tsx
 
 import { Link } from "lucide-react";
 import React, { FC } from "react";
@@ -23,6 +22,9 @@ async function getDetailProduct(id: string) {
 
 const ProductDetail: FC<ProductDetailProps> = async ({ id }) => {
   const product = await getDetailProduct(id);
+
+  
+
   const generateRating = (rating: number) => {
     switch (rating) {
       case 1:
@@ -99,8 +101,10 @@ const ProductDetail: FC<ProductDetailProps> = async ({ id }) => {
         <p className="text-lg mb-4">{formatRupiah(product?.price!)} </p>
         {/* Add more details here */}
 
+
+     
         <div className="bg-primary text-white text-[14px] md:text-[16px] p-2 px-4 rounded-lg inline-block cursor-pointer hover:bg-blackish">
-          Order Now
+          <a href="https://wa.me/6281273312278?text=Hi%2C%20I%20want%20to%20order%20" target="blank">Order Now</a>
         </div>
       </div>
     </div>
