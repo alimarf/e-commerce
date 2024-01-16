@@ -16,7 +16,7 @@ const Footer = () => {
       <div className="container mx-auto">
         {/* Adjust spacing or styling as needed */}
         <div className="pb-4">
-          Copyright © Byme <br /> All Rights Reserved 2024.
+          Copyright ©  <br /> All Rights Reserved 2024.
         </div>
       </div>
     </div>

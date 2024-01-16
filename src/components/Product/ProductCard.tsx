@@ -108,7 +108,7 @@ const ProductCard: React.FC<propsType> = ({
       {session === null ? (
         <Link
           href="/auth/signin"
-          className="bg-primary text-white text-[14px] md:text-[16px] p-2 px-4 rounded-lg inline-block cursor-pointer hover:bg-blackish"
+          className="bg-primary text-white text-[14px] md:text-[16px] p-2 px-4 m-2 rounded-lg inline-block cursor-pointer hover:bg-blackish"
         >
           Order Now
         </Link>

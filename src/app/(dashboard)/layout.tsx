@@ -35,6 +35,7 @@ export default async function RootLayout({
         <main>
           <NextAuthProvider>
             <div>
+              <HeaderTop/>
               <Header />
               {children}
               <Footer />

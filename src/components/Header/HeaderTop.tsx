@@ -9,25 +9,32 @@ const HeaderTop = () => {
         <div className="flex justify-between items-center">
           <div className="hidden lg:flex gap-1">
             <div className="header_top__icon_wrapper">
-              <BsFacebook />
+              <a href="http://">
+                <BsFacebook />
+              </a>
+
             </div>
             <div className="header_top__icon_wrapper">
+              <a href="http://">
               <BsTwitter />
+              </a>
+            
             </div>
             <div className="header_top__icon_wrapper">
+              <a href="http://">
               <BsInstagram />
+              </a>
+              
             </div>
-            <div className="header_top__icon_wrapper">
-              <BsLinkedin />
-            </div>
+           
           </div>
 
           <div className="text-gray-500 text-[12px]">
-           
+
           </div>
 
           <div className="flex gap-4">
-           
+
           </div>
         </div>
       </div>
