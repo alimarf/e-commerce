@@ -1,5 +1,3 @@
-
-import { Link } from "lucide-react";
 import React, { FC } from "react";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import prisma from "../../../../../lib/prisma";
@@ -111,4 +109,4 @@ const ProductDetail: FC<ProductDetailProps> = async ({ id }) => {
   );
 };
 
-export default ProductDetail;
+export default ProductDetailProps;
