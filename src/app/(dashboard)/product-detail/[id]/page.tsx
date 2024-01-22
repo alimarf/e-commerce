@@ -7,8 +7,13 @@ import prisma from "../../../../../lib/prisma";
 import { formatRupiah } from "@/lib/utils";
 import Image from "next/image";
 
-interface ProductDetailProps {
+
+type paramsType = {
   id: string;
+};
+
+interface ProductDetailProps {
+  params: paramsType;
 }
 
 async function getDetailProduct(id: string) {
@@ -21,8 +26,8 @@ async function getDetailProduct(id: string) {
   return product;
 }
 
-const ProductDetail: FC<ProductDetailProps> = async ({ id }) => {
-  const product = await getDetailProduct(id);
+const ProductDetail: FC<ProductDetailProps> = async ({ params }) => {
+  const product = await getDetailProduct(params.id);
   const generateRating = (rating: number) => {
     switch (rating) {
       case 1:

@@ -3,7 +3,6 @@ import "../globals.css";
 
 import { Epilogue } from "next/font/google";
 import { redirect } from "next/navigation";
-import { authOptions } from "../api/auth/[...nextauth]/route";
 import { Toaster } from "@/components/ui/toaster";
 
 const epilogue = Epilogue({ subsets: ["latin"] });
