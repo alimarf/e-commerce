@@ -31,6 +31,7 @@ const Home = () => {
         <Carousel autoPlay infiniteLoop showThumbs={false}>
           <div>
             <img src="/banner-1.jpg" alt="image1" />
+
           </div>
           <div>
             <img src="/banner-2.jpg" alt="image2" />

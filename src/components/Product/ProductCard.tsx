@@ -84,57 +84,47 @@ const ProductCard: React.FC<propsType> = ({
   };
 
   return (
-    <div className="px-4 border border-gray-200 rounded-xl max-w-[400px]">
+    <div className="border border-gray-200 rounded-xl" style={{ height: '550px', display: 'flex', flexDirection: 'column' }}>
       <div>
         <Image
-          className="w-full h-auto"
+          className="border border-gray-200 rounded-xl w-full h-auto"
           src={`/${img}`}
           width={200}
           height={300}
           alt={title}
         />
       </div>
-
-      <div className="space-y-2 py-2">
+  
+      <div className="px-2 space-y-2 py-2 flex-grow">
         <h2 className="text-black font-medium uppercase">{title}</h2>
         <p className="text-gray-500 max-w-[150px]">{desc}</p>
         <div>{generateRating(rating)}</div>
-
+  
         <div className="font-bold flex gap-4">
           Rp.{price}
-          {/* <del className="text-gray-500 font-normal">
-            ${parseInt(price) + 50}.00
-          </del> */}
         </div>
-
-        {/* <Link href="/product-detail" className="bg-primary text-white text-[14px] md:text-[16px] p-2 px-4 rounded-lg inline-block cursor-pointer hover:bg-blackish">
-          Order Now
-        </Link> */}
-
-        {session === null ? (
-          <Link
-            href="/auth/signin"
-            className="bg-primary text-white text-[14px] md:text-[16px] p-2 px-4 rounded-lg inline-block cursor-pointer hover:bg-blackish"
-          >
-            Order Now
-          </Link>
-        ) : (
-          <button
-            // onClick={() => router.push("/product-detail")}
-            onClick={() => {
-              router.push(`/product-detail/${id}`)
-            }}
-            className="bg-primary text-white text-[14px] md:text-[16px] p-2 px-4 rounded-lg inline-block cursor-pointer hover:bg-blackish"
-          >
-            Order Now
-          </button>
-        )}
-        {/* <div className="bg-primary text-white text-[14px] md:text-[16px] p-2 px-4 rounded-lg inline-block cursor-pointer hover:bg-blackish">
-          Order Now
-        </div> */}
       </div>
+  
+      {session === null ? (
+        <Link
+          href="/auth/signin"
+          className="bg-primary text-white text-[14px] md:text-[16px] p-2 px-4 m-2 rounded-lg inline-block cursor-pointer hover:bg-blackish"
+        >
+          Order Now
+        </Link>
+      ) : (
+        <button
+          onClick={() => {
+            router.push(`/product-detail/${id}`)
+          }}
+          className="bg-primary text-white text-[14px] md:text-[16px] p-2 px-6 m-2 rounded-lg inline-block cursor-pointer hover:bg-blackish"
+        >
+          Order Now
+        </button>
+      )}
     </div>
   );
+  
 };
 
 export default ProductCard;

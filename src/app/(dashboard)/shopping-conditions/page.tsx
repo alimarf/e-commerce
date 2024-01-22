@@ -17,8 +17,9 @@ const ShoppingConditions: FC<ShoppingConditionsProps> = ({ }) => {
           </CardHeader>
           <CardContent>
             <p>
-              Pastikan Anda Login Terlebih dahulu sebelum order pesanan
+              Pastikan Anda Sign In Terlebih dahulu sebelum order pesanan, tombol login berada di pojok kanan atas
             </p>
+            <img src="/step1.png" className='' />
           </CardContent>
 
         </Card>
@@ -32,6 +33,8 @@ const ShoppingConditions: FC<ShoppingConditionsProps> = ({ }) => {
               Setelah login,
               silahkan klik order now pada produk yang anda inginkan
             </p>
+
+            <img src="/step2.png" className='' />
           </CardContent>
         </Card>
 
@@ -43,6 +46,7 @@ const ShoppingConditions: FC<ShoppingConditionsProps> = ({ }) => {
             <p>
               Setelah Masuk kedalam detail produk lanjutkan klik tombol order now
             </p>
+            <img src="/step3.png" className='' />
           </CardContent>
 
         </Card>
