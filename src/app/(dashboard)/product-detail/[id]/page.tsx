@@ -85,7 +85,7 @@ const ProductDetail: FC<ProductDetailProps> = async ({ id }) => {
 
   return (
     <div className="flex">
-      <div className="w-1/2 p-4">
+      <div className="w-1/2 p-20">
         <Image
           className="w-full h-auto"
           src={`/${product?.image}`}
@@ -94,7 +94,7 @@ const ProductDetail: FC<ProductDetailProps> = async ({ id }) => {
           alt={product?.name!}
         />
       </div>
-      <div className="w-1/2 p-4">
+      <div className="w-1/2 p-20">
         <h1 className="text-2xl font-bold mb-2">{product?.name}</h1>
         <h3 className="text-2m mb-2">{product?.description}</h3>
         <div>{generateRating(product?.rating!)}</div>
@@ -104,7 +104,7 @@ const ProductDetail: FC<ProductDetailProps> = async ({ id }) => {
 
      
         <div className="bg-primary text-white text-[14px] md:text-[16px] p-2 px-4 rounded-lg inline-block cursor-pointer hover:bg-blackish">
-          <a href="https://wa.me/6281273312278?text=Hi%2C%20I%20want%20to%20order%20" target="blank">Order Now</a>
+          <a href="https://wa.me/6289686946758?text=Hi%2C%20I%20want%20to%20order%20" target="blank">Order Now</a>
         </div>
       </div>
     </div>
