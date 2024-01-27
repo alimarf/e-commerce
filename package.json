@@ -1,7 +1,6 @@
 {
   "name": "e-commerce",
   "version": "0.1.0",
-  
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -21,6 +20,7 @@
     "bcryptjs": "^2.4.3",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
+    "cors": "^2.8.5",
     "cz-customizable": "^7.0.0",
     "embla-carousel-react": "^8.0.0-rc19",
     "formidable": "^3.5.1",

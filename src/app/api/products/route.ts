@@ -7,10 +7,16 @@ import { zfd } from "zod-form-data";
 import { z } from "zod";
 import { NextApiRequest, NextApiResponse } from "next";
 
+export const headers = {
+  "Content-Type": "application/json",
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+  "Access-Control-Allow-Headers": "Content-Type, Authorization",
+};
+
 //Create Data Products
 export async function POST(request: Request) {
   try {
-    
     const formData = await request.formData();
 
     const schema = zfd.formData({
@@ -19,9 +25,10 @@ export async function POST(request: Request) {
       price: zfd.numeric(z.number()),
       rating: zfd.numeric(z.number().min(1).max(5)),
       image: zfd.file(),
+      qty: zfd.numeric(z.number()),
     });
 
-    const { name, description, price, rating, image } = schema.parse(
+    const { name, description, price, rating, image, qty } = schema.parse(
       await formData
     );
 
@@ -32,6 +39,7 @@ export async function POST(request: Request) {
         price: price,
         rating: rating,
         image: "images/" + image.name,
+        qty: qty,
       },
     });
 
@@ -51,6 +59,7 @@ export async function POST(request: Request) {
         price: result.price,
         rating: result.rating,
         image: "images/" + image.name,
+        qty: result.qty,
       },
     });
   } catch (error) {
@@ -64,7 +73,47 @@ export async function POST(request: Request) {
 }
 
 // READ Data Products
-export async function GET(request: NextRequest, response: NextApiResponse) {
+// export async function GET(request: NextRequest) {
+
+//   try {
+//     const search = request.nextUrl.searchParams.get("search");
+
+//     if (search) {
+//       const searchResults = await prisma.product.findMany({
+//         where: {
+//           OR: [
+//             { name: { contains: search as string } },
+//             { description: { contains: search as string } },
+//           ],
+//         },
+//       });
+
+//       return NextResponse.json({
+//         status: 200,
+//         message: "Search results successfully retrieved",
+//         data: searchResults,
+//       });
+//     } else {
+//       // If no search query is provided, retrieve all products
+//       const products = await prisma.product.findMany();
+
+//       return NextResponse.json({
+//         status: 200,
+//         message: "Products successfully retrieved",
+//         data: products,
+//       });
+//     }
+//   } catch (error) {
+//     console.error("Failed to retrieve products:", error);
+
+//     return NextResponse.json({
+//       status: 500,
+//       message: "Internal Server Error",
+//     });
+//   }
+// }
+
+export async function GET(request: NextRequest) {
   try {
     const search = request.nextUrl.searchParams.get("search");
 
@@ -78,28 +127,51 @@ export async function GET(request: NextRequest, response: NextApiResponse) {
         },
       });
 
-      return NextResponse.json({
-        status: 200,
-        message: "Search results successfully retrieved",
-        data: searchResults,
-      });
+      const response = new Response(
+        JSON.stringify({
+          status: 200,
+          message: "Search results successfully retrieved",
+          data: searchResults,
+        }),
+        {
+          status: 200,
+          headers: headers,
+        }
+      );
+
+      return response;
     } else {
-      // If no search query is provided, retrieve all products
       const products = await prisma.product.findMany();
 
-      return NextResponse.json({
-        status: 200,
-        message: "Products successfully retrieved",
-        data: products,
-      });
+      const response = new Response(
+        JSON.stringify({
+          status: 200,
+          message: "Products successfully retrieved",
+          data: products,
+        }),
+        {
+          status: 200,
+          headers: headers,
+        }
+      );
+
+      return response;
     }
   } catch (error) {
     console.error("Failed to retrieve products:", error);
 
-    return NextResponse.json({
-      status: 500,
-      message: "Internal Server Error",
-    });
+    const response = new Response(
+      JSON.stringify({
+        status: 500,
+        message: "Internal Server Error",
+      }),
+      {
+        status: 500,
+        headers: {},
+      }
+    );
+
+    return response;
   }
 }
 
@@ -128,9 +200,10 @@ export async function PUT(request: Request) {
       price: zfd.numeric(z.number()),
       rating: zfd.numeric(z.number().min(1).max(5)),
       image: zfd.file(),
+      qty: zfd.numeric(z.number()),
     });
 
-    const { name, description, price, rating, image } = schema.parse(
+    const { name, description, price, rating, image, qty } = schema.parse(
       await formData
     );
 
@@ -144,6 +217,7 @@ export async function PUT(request: Request) {
         price: price || product.price,
         rating: rating || product.rating,
         image: image ? "images/" + image.name : product.image,
+        qty: qty || product.qty,
       },
     });
 
