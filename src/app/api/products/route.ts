@@ -251,10 +251,17 @@ export async function DELETE(request: Request) {
     const productId = formData.get("id");
 
     if (!productId) {
-      return NextResponse.json({
-        status: 404,
-        message: "Product not found",
-      });
+      const response = new Response(
+        JSON.stringify({
+          status: 404,
+          message: "Products Not Found",
+        }),
+        {
+          status: 200,
+          headers: headers,
+        }
+      );
+      return response
     }
 
     await prisma.product.delete({
@@ -263,16 +270,33 @@ export async function DELETE(request: Request) {
       },
     });
 
-    return NextResponse.json({
-      status: 200,
-      message: "Product successfully deleted",
-    });
-  } catch (error) {
-    console.error("Product deletion failed:", error);
+    const response = new Response(
+      JSON.stringify({
+        status: 200,
+        message: "Products successfully deleted",
+      }),
+      {
+        status: 200,
+        headers: headers,
+      }
+    );
 
-    return NextResponse.json({
-      status: 500,
-      message: "Internal Server Error",
-    });
+    return response;
+    
+  } catch (error) {
+    console.error("Failed to deleted products:", error);
+
+    const response = new Response(
+      JSON.stringify({
+        status: 500,
+        message: "Internal Server Error",
+      }),
+      {
+        status: 500,
+        headers: {},
+      }
+    );
+
+    return response;
   }
 }
