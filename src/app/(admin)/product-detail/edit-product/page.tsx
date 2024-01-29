@@ -1,5 +1,6 @@
-"use client"
-import React, { FC } from 'react'
+/* eslint-disable react-hooks/rules-of-hooks */
+"use client";
+import React, { ChangeEvent, FC, useEffect, useRef, useState } from "react";
 import {
   Form,
   FormControl,
@@ -12,39 +13,105 @@ import { useForm } from "react-hook-form";
 import { Input } from "@/components/ui/input";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Button } from '@/components/ui/button';
-import { Textarea } from '@/components/ui/textarea';
-interface EditProductPageProps {
+import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
+import { useRouter, useSearchParams } from "next/navigation";
+import Image from "next/image";
+import { toast } from "@/components/ui/use-toast";
 
-}
+interface EditProductPageProps {}
 
-const page: FC<EditProductPageProps> = ({ }) => {
+const Editpage: FC<EditProductPageProps> = ({}) => {
+  const router = useRouter();
+  // const [previewImg, setPreviewImg] = useState("");
+  // const inputRef = useRef<HTMLInputElement>(null);
+
+  const searchParams = useSearchParams();
+  const product = searchParams.get("product");
+
+  const decodedProduct = decodeURIComponent(product!);
+
+  const originalObject = JSON.parse(decodedProduct);
+
+  console.log("Original Object:", originalObject);
 
   const formSchema = z.object({
-    name: z.string(),
+    name: z.string({ required_error: "name required" }),
     description: z.string(),
-    price: z.number().int(),
-    rating: z.number().lt(5),
-    image: z.string(),
-    qty: z.number().int(),
-
-  })
+    price: z.string(),
+    rating: z.string(),
+    image: z.custom<File>((v) => v instanceof File, {
+      message: "Image is required",
+    }),
+    qty: z.string(),
+  });
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: "",
+      name: originalObject.name,
+      description: originalObject.description,
+      price: originalObject.price,
+      rating: originalObject.rating,
+      // image: originalObject.image,
+      qty: originalObject.qty,
     },
-  })
+  });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values)
+  // const handleUploadFile = () => {
+  //   inputRef.current?.click();
+  // };
+
+  // const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+  //   if (e.target.files) {
+  //     setPreviewImg(URL.createObjectURL(e.target.files[0]));
+  //     form.setValue('image', e.target.files[0].toString());
+
+  //     console.log('IMAGE', previewImg);
+
+  //   }
+  // };
+  // useEffect(() => {
+  //   async function getImage() {
+  //     form.getValues(originalObject.image);
+  //     setPreviewImg(originalObject.image);
+  //   }
+
+  //   if (form.getValues(originalObject.image) !== "") {
+  //     getImage();
+  //   }
+  // }, []);
+
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    const formData = new FormData();
+    formData.append("id", originalObject.id);
+    formData.append("name", values.name);
+    formData.append("description", values.description);
+    formData.append("price", values.price);
+    formData.append("rating", values.rating);
+    formData.append("image", values.image);
+    formData.append("qty", values.qty);
+    try {
+      const response = await fetch(`/api/products`, {
+        method: "PUT",
+        body: formData,
+      });
+      console.log(response);
+      router.push("/admin");
+      return;
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "An unexpected error occurred. Please try again.",
+      });
+      console.error(error);
+    }
+
+    console.log(values);
   }
   return (
     <div>
-      <div className='mb-2'>Edit Product</div>
+      <div className="mb-2">Edit Product</div>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="mt-5 space-y-5">
           <FormField
@@ -70,14 +137,16 @@ const page: FC<EditProductPageProps> = ({ }) => {
                 <FormLabel>Description</FormLabel>
                 <FormControl>
                   {/* <Input placeholder="Enter your Description" {...field} /> */}
-                  <Textarea placeholder="Type your description here." {...field} />
+                  <Textarea
+                    placeholder="Type your description here."
+                    {...field}
+                  />
                 </FormControl>
 
                 <FormMessage />
               </FormItem>
             )}
           />
-
 
           <FormField
             control={form.control}
@@ -107,14 +176,70 @@ const page: FC<EditProductPageProps> = ({ }) => {
             )}
           />
 
+          {/* <div className="inline-flex items-center gap-8">
+            <div>
+              {previewImg !== "" && (
+                <Image
+                  width={120}
+                  height={120}
+                  src={`/${previewImg}`}
+                  alt={previewImg}
+                />
+              )}
+            </div>
+            <div
+              className="px-10 py-6 border-2 border-dashed rounded-sm cursor-pointer border-bluePrimary w-max"
+              onClick={handleUploadFile}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="w-6 h-6 mx-auto mb-2 text-bluePrimary"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"
+                />
+              </svg>
+              <div className="text-center">
+                <span className="font-medium text-bluePrimary">
+                  Click to replace
+                </span>{" "}
+                <span className="text-gray-500">or drag and drop</span>
+              </div>
+              <div className="text-sm text-gray-600">
+                PNG, JPG, JPEG (max. 400 x 400px)
+              </div>
+              <input
+                ref={inputRef}
+                type="file"
+                className="hidden"
+                onChange={handleFileChange}
+                accept="image/png, image/jpeg, image/jpg"
+              />
+            </div>
+          </div> */}
+
           <FormField
             control={form.control}
             name="image"
-            render={({ field }) => (
+            render={({ field: { ref, name, onBlur, onChange } }) => (
               <FormItem>
                 <FormLabel>Select Image</FormLabel>
                 <FormControl>
-                  <Input type='file' placeholder="Select image" {...field} />
+                  <Input
+                    type="file"
+                    placeholder="Select image"
+                    onChange={(e) => {
+                      const file = e.target.files?.[0];
+                      onChange(e.target.files?.[0]);
+                      //setImagePreview(file ? URL.createObjectURL(file) : null);
+                    }}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -135,14 +260,11 @@ const page: FC<EditProductPageProps> = ({ }) => {
             )}
           />
 
-          <Button>
-            Save
-          </Button>
-
+          <Button>Save</Button>
         </form>
       </Form>
     </div>
-  )
-}
+  );
+};
 
-export default page;
+export default Editpage;

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 "use client"
 import React, { FC, useState } from 'react'
 import {
@@ -48,8 +49,6 @@ const page: FC<AddProductPageProps> = ({ }) => {
     const [isLoading, setIsLoading] = useState(false);
 
 
-
-
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
         const formData = new FormData();
         formData.append("name", values.name);
@@ -61,13 +60,12 @@ const page: FC<AddProductPageProps> = ({ }) => {
 
         try {
             setIsLoading(true);
-            const response = await fetch(`api/products`, {
+            const response = await fetch(`/api/products`, {
                 method: "POST",
-                mode: "no-cors",
                 body: formData,
             });
             console.log(response);
-            await router.back()
+            router.push('/admin')
             return;
 
 

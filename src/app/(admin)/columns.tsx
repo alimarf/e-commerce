@@ -29,7 +29,7 @@ export const columns: ColumnDef<Product>[] = [
     header: "Image",
     cell: ({ row }) => (
       <Image
-        src={`/${row.original.name}`}
+        src={`/${row.original.image}`}
         alt="Product Image"
         width={40}
         height={40}
@@ -71,43 +71,37 @@ export const columns: ColumnDef<Product>[] = [
     id: "actions",
     cell: ({ row }) => {
       const router = useRouter();
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+      const productQueryParam = encodeURIComponent(JSON.stringify(row.original));
 
 
       const handleDelete = async () => {
         const id = row.original.id;
-      
+
         const formData = new FormData();
         formData.append("id", id);
-      
+
         try {
-          const response = await fetch(`${apiUrl}/products`, {
-            method: 'DELETE',
+          const response = await fetch(`/api/products`, {
+            method: "DELETE",
             body: formData,
-            headers: {
-              'Access-Control-Allow-Origin': 'http://localhost:3000/api/products',
-              'Access-Control-Allow-Methods': 'GET,OPTIONS,PATCH,DELETE,POST,PUT',
-              'Access-Control-Allow-Headers': 'Content-Type, Authorization'
-              // Note: The 'Access-Control-Allow-*' headers should be set by the server, not the client
-            }
           });
-      
+
+          await router.push('/admin');
+
           console.log(response);
-      
+
           // Handle the response as needed
           if (response.ok) {
             // Successful deletion
-            console.log('Product deleted successfully');
+            console.log("Product deleted successfully");
           } else {
             // Handle other status codes (e.g., 404 Not Found, 500 Internal Server Error)
-            console.error('Error deleting product:', response.statusText);
+            console.error("Error deleting product:", response.statusText);
           }
         } catch (error) {
-          console.error('Error deleting product:', error);
+          console.error("Error deleting product:", error);
         }
       };
-      
-
 
       return (
         <DropdownMenu>
@@ -118,10 +112,17 @@ export const columns: ColumnDef<Product>[] = [
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent>
-            <DropdownMenuItem onClick={() => router.push(`/product-detail/edit-product/${row.original.id}`)}>
+            <DropdownMenuItem
+              onClick={() =>
+                
+                router.push(`/product-detail/edit-product?product=${productQueryParam}`)
+              }
+            >
               Edit
             </DropdownMenuItem>
-            <DropdownMenuItem className="text-red-500" onClick={handleDelete}>Delete</DropdownMenuItem>
+            <DropdownMenuItem className="text-red-500" onClick={handleDelete}>
+              Delete
+            </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       );
