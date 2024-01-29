@@ -28,7 +28,7 @@ const Sidebar: FC<SidebarProps> = ({}) => {
           <Button
             variant={"ghost"}
             className="justify-start w-full rounded-none hover:text-primary"
-            onClick={() => router.push("/")}
+            onClick={() => router.push("/admin")}
           >
             <AiOutlineHome className="mr-2 text-lg" />
             Products

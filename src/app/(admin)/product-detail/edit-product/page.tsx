@@ -19,9 +19,9 @@ import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
 import { toast } from "@/components/ui/use-toast";
 
-interface EditProductPageProps {}
+interface EditProductPageProps { }
 
-const Editpage: FC<EditProductPageProps> = ({}) => {
+const Editpage: FC<EditProductPageProps> = ({ }) => {
   const router = useRouter();
   // const [previewImg, setPreviewImg] = useState("");
   // const inputRef = useRef<HTMLInputElement>(null);
@@ -37,13 +37,15 @@ const Editpage: FC<EditProductPageProps> = ({}) => {
 
   const formSchema = z.object({
     name: z.string({ required_error: "name required" }),
-    description: z.string(),
-    price: z.string(),
-    rating: z.string(),
-    image: z.custom<File>((v) => v instanceof File, {
-      message: "Image is required",
-    }),
-    qty: z.string(),
+    description: z.string({ required_error: "description required" }),
+    price: z.string({ required_error: "price required" }),
+    rating: z.string({ required_error: "rating required" }),
+    image:  z
+    .custom<File | undefined>((v) => v instanceof File || v === undefined, {
+      message: 'Image is required',
+    }).nullable(),
+    qty: z.string({ required_error: "quantity required" }),
+
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -51,10 +53,10 @@ const Editpage: FC<EditProductPageProps> = ({}) => {
     defaultValues: {
       name: originalObject.name,
       description: originalObject.description,
-      price: originalObject.price,
-      rating: originalObject.rating,
-      // image: originalObject.image,
-      qty: originalObject.qty,
+      price: originalObject.price.toString(),
+      rating: originalObject.rating.toString(),
+      //image: originalObject.image.toString(),
+      qty: originalObject.qty.toString(),
     },
   });
 
@@ -89,8 +91,14 @@ const Editpage: FC<EditProductPageProps> = ({}) => {
     formData.append("description", values.description);
     formData.append("price", values.price);
     formData.append("rating", values.rating);
-    formData.append("image", values.image);
+
+    // Conditionally append image data
+    if (values.image instanceof File) {
+      formData.append("image", values.image);
+    }
+
     formData.append("qty", values.qty);
+
     try {
       const response = await fetch(`/api/products`, {
         method: "PUT",
@@ -109,6 +117,7 @@ const Editpage: FC<EditProductPageProps> = ({}) => {
 
     console.log(values);
   }
+
   return (
     <div>
       <div className="mb-2">Edit Product</div>
@@ -155,7 +164,7 @@ const Editpage: FC<EditProductPageProps> = ({}) => {
               <FormItem>
                 <FormLabel>Price</FormLabel>
                 <FormControl>
-                  <Input placeholder="Enter price" {...field} />
+                  <Input type="number" placeholder="Enter price" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -169,12 +178,42 @@ const Editpage: FC<EditProductPageProps> = ({}) => {
               <FormItem>
                 <FormLabel>Rating</FormLabel>
                 <FormControl>
-                  <Input placeholder="Enter rating" {...field} />
+                  <Input type="number" readOnly placeholder="Enter rating" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
             )}
           />
+
+          <FormField
+            control={form.control}
+            name="rating"
+            render={({ field }) => (
+              <FormItem>
+                <FormControl>
+                  <div>
+                    {[1, 2, 3, 4, 5].map((value) => (
+                      <Button
+                        defaultValue={field.value}
+                        key={value}
+                        type="button"
+                        onClick={() => field.onChange(value.toString())}
+                        style={{
+                          marginRight: '5px',
+                          background: field.value === value.toString() ? 'green' : 'black',
+                          backgroundColor: field.value === value.toString() ? 'green' : 'black',
+                        }}
+                      >
+                        {value}
+                      </Button>
+                    ))}
+                  </div>
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
 
           {/* <div className="inline-flex items-center gap-8">
             <div>
@@ -236,8 +275,8 @@ const Editpage: FC<EditProductPageProps> = ({}) => {
                     placeholder="Select image"
                     onChange={(e) => {
                       const file = e.target.files?.[0];
-                      onChange(e.target.files?.[0]);
-                      //setImagePreview(file ? URL.createObjectURL(file) : null);
+                      // Allow clearing the current selection
+                      onChange(file || null);
                     }}
                   />
                 </FormControl>
@@ -253,7 +292,7 @@ const Editpage: FC<EditProductPageProps> = ({}) => {
               <FormItem>
                 <FormLabel>Quantity</FormLabel>
                 <FormControl>
-                  <Input placeholder="Enter rating" {...field} />
+                  <Input type="number" placeholder="Enter Quantity" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>

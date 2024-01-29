@@ -106,6 +106,8 @@ export const columns: ColumnDef<Product>[] = [
           // Handle the response as needed
           if (response.ok) {
             // Successful deletion
+            await router.push('/admin');
+
             console.log("Product deleted successfully");
           } else {
             // Handle other status codes (e.g., 404 Not Found, 500 Internal Server Error)

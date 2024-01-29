@@ -30,14 +30,14 @@ const page: FC<AddProductPageProps> = ({ }) => {
     
     const formSchema = z.object({
         name: z.string({ required_error: "name required" }),
-        description: z.string(),
-        price: z.string(),
-        rating: z.string(),
+        description: z.string({required_error:"description required"}),
+        price: z.string({required_error:"price required"}),
+        rating: z.string({required_error:"rating required"}),
         image: z
             .custom<File>((v) => v instanceof File, {
                 message: 'Image is required',
             }),
-        qty: z.string(),
+        qty: z.string({required_error:"quantity required"}),
 
     })
 
@@ -135,26 +135,25 @@ const page: FC<AddProductPageProps> = ({ }) => {
                         )}
                     />
 
-                    {/* <FormField
-                        control={form.control}
-                        name="rating"
-                        render={({ field }) => (
-                            <FormItem>
-                                <FormLabel>Rating</FormLabel>
-                                <FormControl>
-                                    <Input type='number' placeholder="Enter rating" {...field} max={5} min={0} maxLength={1}/>
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    /> */}
-
                     <FormField
                         control={form.control}
                         name="rating"
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel>Rating</FormLabel>
+                                <FormControl>
+                                    <Input readOnly type='number' placeholder="Enter rating" {...field} max={5} min={0} maxLength={1}/>
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
+
+                    <FormField
+                        control={form.control}
+                        name="rating"
+                        render={({ field }) => (
+                            <FormItem>
                                 <FormControl>
                                     <div>
                                         {[1, 2, 3, 4, 5].map((value) => (
