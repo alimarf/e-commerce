@@ -42,7 +42,6 @@ const SignInPage: FC<SignInPageProps> = ({}) => {
     });
 
     console.log(authenticated);
-    
 
     if (authenticated?.error) {
       setIsLoading(false);
@@ -54,7 +53,24 @@ const SignInPage: FC<SignInPageProps> = ({}) => {
       return;
     }
 
-    await router.push("/");
+    const response = await fetch("/api/check-admin", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({email: val.email}),
+    });
+
+    if (response.ok) {
+      const result = await response.json();
+      if(result.data === false) {
+        await router.push("/");
+      } else if(result.data === true){
+        await router.push("/admin");
+      }
+    } else {
+      console.error("Error checking admin status");
+    }
+
+
   };
 
   return (

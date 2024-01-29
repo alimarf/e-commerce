@@ -1,6 +1,7 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 import bcrypt from "bcryptjs";
+import prisma from "../../lib/prisma";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -21,14 +22,16 @@ export const comparePassword = async (
   return isMatch;
 };
 
-export const fetcher = (url: string | URL | Request) => fetch(url).then((res) => res.json());
+export const fetcher = (url: string | URL | Request) =>
+  fetch(url).then((res) => res.json());
 
 export function formatRupiah(amount: number) {
-  const formatter = new Intl.NumberFormat('id-ID', {
-    style: 'currency',
-    currency: 'IDR',
+  const formatter = new Intl.NumberFormat("id-ID", {
+    style: "currency",
+    currency: "IDR",
     minimumFractionDigits: 0,
   });
 
   return formatter.format(amount);
 }
+
