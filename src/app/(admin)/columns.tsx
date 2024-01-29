@@ -13,6 +13,18 @@ import {
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+
 export type Product = {
   id: string;
   name: string;
@@ -71,8 +83,9 @@ export const columns: ColumnDef<Product>[] = [
     id: "actions",
     cell: ({ row }) => {
       const router = useRouter();
-      const productQueryParam = encodeURIComponent(JSON.stringify(row.original));
-
+      const productQueryParam = encodeURIComponent(
+        JSON.stringify(row.original)
+      );
 
       const handleDelete = async () => {
         const id = row.original.id;
@@ -86,7 +99,7 @@ export const columns: ColumnDef<Product>[] = [
             body: formData,
           });
 
-          await router.push('/admin');
+          await router.push("/admin");
 
           console.log(response);
 
@@ -114,15 +127,35 @@ export const columns: ColumnDef<Product>[] = [
           <DropdownMenuContent>
             <DropdownMenuItem
               onClick={() =>
-                
-                router.push(`/product-detail/edit-product?product=${productQueryParam}`)
+                router.push(
+                  `/product-detail/edit-product?product=${productQueryParam}`
+                )
               }
             >
               Edit
             </DropdownMenuItem>
-            <DropdownMenuItem className="text-red-500" onClick={handleDelete}>
-              Delete
-            </DropdownMenuItem>
+            {/* <DropdownMenuItem className="text-red-500">
+            
+            </DropdownMenuItem> */}
+
+            <AlertDialog>
+              <AlertDialogTrigger className="text-red-500 ml-2">Delete</AlertDialogTrigger>
+              <AlertDialogContent>
+                <AlertDialogHeader>
+                  <AlertDialogTitle>Are you want to delete this product?</AlertDialogTitle>
+                  <AlertDialogDescription>
+                    This action cannot be undone. This will permanently delete
+                    your product and remove your data from servers.
+                  </AlertDialogDescription>
+                </AlertDialogHeader>
+                <AlertDialogFooter>
+                  <AlertDialogCancel>Cancel</AlertDialogCancel>
+                  <AlertDialogAction className="bg-red-500" onClick={handleDelete}>
+                    Delete
+                  </AlertDialogAction>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
           </DropdownMenuContent>
         </DropdownMenu>
       );
