@@ -197,23 +197,16 @@ export async function PUT(request: Request) {
     const schema = zfd.formData({
       name: zfd.text(),
       description: zfd.text(),
-      price: zfd.text(),
-      rating: zfd.text(),
-      image: zfd.file().nullable(),
-      qty: zfd.text(),
+      price: zfd.numeric(z.number()),
+      rating: zfd.numeric(z.number().min(1).max(5)),
+      image: zfd.file(),
+      qty: zfd.numeric(),
     });
-    
+
     const { name, description, price, rating, image, qty } = schema.parse(
       await formData
     );
-    
-    if (image instanceof File) {
-      const bytes = await image.arrayBuffer();
-      const buffer = Buffer.from(bytes);
-      const imagePath = path.join("public/images", image.name);
-      await writeFile(imagePath, buffer);
-    }
-    
+
     const updatedProduct = await prisma.product.update({
       where: {
         id: productId?.toString(),
@@ -221,10 +214,10 @@ export async function PUT(request: Request) {
       data: {
         name: name || product.name,
         description: description || product.description,
-        price: parseInt(price) || product.price,
-        rating: parseInt(rating) || product.rating,
+        price: price || product.price,
+        rating: rating || product.rating,
         image: image ? "images/" + image.name : product.image,
-        qty: parseInt(qty) || product.qty,
+        qty: qty !== undefined && qty !== null ? qty : product.qty,
       },
     });
 

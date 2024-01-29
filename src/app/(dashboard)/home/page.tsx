@@ -18,6 +18,7 @@ interface Product {
   price: number;
   rating: number;
   image: string;
+  qty: number;
 }
 
 const Home = () => {
@@ -50,7 +51,9 @@ const Home = () => {
           ) : !productsData || !productsData.data ? (
             <p>Loading...</p>
           ) : (
-            productsData.data.map((item: Product) => (
+            productsData.data
+            .filter((item: Product) => item.qty > 0) // Filter products with qty > 0
+            .map((item: Product) => (
               <ProductCard
                 key={item.id}
                 id={item.id}

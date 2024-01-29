@@ -40,10 +40,10 @@ const Editpage: FC<EditProductPageProps> = ({ }) => {
     description: z.string({ required_error: "description required" }),
     price: z.string({ required_error: "price required" }),
     rating: z.string({ required_error: "rating required" }),
-    image:  z
-    .custom<File | undefined>((v) => v instanceof File || v === undefined, {
-      message: 'Image is required',
-    }).nullable(),
+    image: z
+      .custom<File>((v) => v instanceof File, {
+        message: 'Image is required',
+      }),
     qty: z.string({ required_error: "quantity required" }),
 
   });
@@ -55,7 +55,7 @@ const Editpage: FC<EditProductPageProps> = ({ }) => {
       description: originalObject.description,
       price: originalObject.price.toString(),
       rating: originalObject.rating.toString(),
-      //image: originalObject.image.toString(),
+      image: originalObject.image.toString(),
       qty: originalObject.qty.toString(),
     },
   });
@@ -91,14 +91,14 @@ const Editpage: FC<EditProductPageProps> = ({ }) => {
     formData.append("description", values.description);
     formData.append("price", values.price);
     formData.append("rating", values.rating);
-
+    formData.append("qty", values.qty.toString());
     // Conditionally append image data
     if (values.image instanceof File) {
       formData.append("image", values.image);
     }
-
-    formData.append("qty", values.qty);
-
+  
+ 
+  
     try {
       const response = await fetch(`/api/products`, {
         method: "PUT",
@@ -114,10 +114,10 @@ const Editpage: FC<EditProductPageProps> = ({ }) => {
       });
       console.error(error);
     }
-
+  
     console.log(values);
   }
-
+  
   return (
     <div>
       <div className="mb-2">Edit Product</div>
@@ -178,7 +178,7 @@ const Editpage: FC<EditProductPageProps> = ({ }) => {
               <FormItem>
                 <FormLabel>Rating</FormLabel>
                 <FormControl>
-                  <Input type="number" readOnly placeholder="Enter rating" {...field} />
+                  <Input type="number" readOnly  placeholder="Enter rating" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -275,8 +275,8 @@ const Editpage: FC<EditProductPageProps> = ({ }) => {
                     placeholder="Select image"
                     onChange={(e) => {
                       const file = e.target.files?.[0];
-                      // Allow clearing the current selection
-                      onChange(file || null);
+                      onChange(e.target.files?.[0]);
+                      //setImagePreview(file ? URL.createObjectURL(file) : null);
                     }}
                   />
                 </FormControl>
@@ -292,7 +292,7 @@ const Editpage: FC<EditProductPageProps> = ({ }) => {
               <FormItem>
                 <FormLabel>Quantity</FormLabel>
                 <FormControl>
-                  <Input type="number" placeholder="Enter Quantity" {...field} />
+                  <Input type="text" placeholder="Enter Quantity" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
