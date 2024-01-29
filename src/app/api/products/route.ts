@@ -290,6 +290,7 @@ export async function DELETE(request: Request) {
       JSON.stringify({
         status: 500,
         message: "Internal Server Error",
+        error: error
       }),
       {
         status: 500,
