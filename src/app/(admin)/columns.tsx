@@ -29,7 +29,7 @@ export const columns: ColumnDef<Product>[] = [
     header: "Image",
     cell: ({ row }) => (
       <Image
-        src={process.env.NEXT_PUBLIC_BASE_URL + row.original.image}
+        src={`/${row.original.name}`}
         alt="Product Image"
         width={40}
         height={40}

@@ -24,11 +24,13 @@ const authOptions: NextAuthOptions = {
         const user = await prisma.user.findFirst({
           where: {
             email: credentials?.email,
-            admin: false
+            //admin: false
           },
         });
 
-        if (!user) {
+        
+
+        if (!user ) {
           return null;
         }
 

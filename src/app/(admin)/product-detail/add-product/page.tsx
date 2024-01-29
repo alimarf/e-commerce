@@ -26,10 +26,7 @@ interface AddProductPageProps {
 
 const page: FC<AddProductPageProps> = ({ }) => {
     const router = useRouter();
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL;
-    const MAX_FILE_SIZE = 5000000;
-    const ACCEPTED_IMAGE_TYPES = ["image/jpeg", "image/jpg", "image/png", "image/webp"];
-
+    
     const formSchema = z.object({
         name: z.string({ required_error: "name required" }),
         description: z.string(),
@@ -64,7 +61,7 @@ const page: FC<AddProductPageProps> = ({ }) => {
 
         try {
             setIsLoading(true);
-            const response = await fetch(`${apiUrl}/products`, {
+            const response = await fetch(`api/products`, {
                 method: "POST",
                 mode: "no-cors",
                 body: formData,

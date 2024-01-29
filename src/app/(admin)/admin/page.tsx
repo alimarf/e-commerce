@@ -9,8 +9,8 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { DataTable } from "./data-table";
-import { columns } from "./columns";
+import { DataTable } from "../data-table";
+import { columns } from "../columns";
 import { Product } from "@prisma/client";
 import useSWR from "swr";
 import { fetcher } from "@/lib/utils";
@@ -24,7 +24,7 @@ const ProductsPage: FC<ProductsPageProps> = ({}) => {
     data: productsData,
     isLoading,
     error,
-  } = useSWR(`${apiUrl}/products`, fetcher);
+  } = useSWR(`api/products`, fetcher);
 
   console.log("PRODUCTS", productsData);
 
@@ -101,6 +101,7 @@ const ProductsPage: FC<ProductsPageProps> = ({}) => {
         )}
       </div>
     </div>
+    
   );
 };
 
