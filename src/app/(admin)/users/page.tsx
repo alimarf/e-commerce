@@ -1,3 +1,4 @@
+"use client"
 import React, { FC } from 'react'
 import {
   Table,
@@ -7,14 +8,33 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
+import useSWR from 'swr';
+import { fetcher } from '@/lib/utils';
+import { columns } from '../columns';
+import { DataTable } from '../data-table';
 
 
 interface UsersPageProps {
 
 }
 
+interface UserData {
+  id: string,
+  name: string,
+  email: string
+}
+
 const UsersPage: FC<UsersPageProps> = ({ }) => {
 
+  const {
+    data: dataUser,
+    isLoading,
+    error,
+  } = useSWR(`api/users`, fetcher);
+
+  const userData = dataUser?.data || [];
+
+  console.log("USERS", userData);
   const data = [
     { id: 1, name: "nikky", email: "nikki@mail.com" },
     { id: 2, name: "alim", email: "alim@mail.com" }
@@ -25,13 +45,13 @@ const UsersPage: FC<UsersPageProps> = ({ }) => {
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead>No</TableHead>
+            <TableHead>Id Customer</TableHead>
             <TableHead>Name</TableHead>
             <TableHead>Email</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
-          {data.map((item) => (
+          {userData.map((item: UserData) => (
             <TableRow key={item.id}>
               <TableCell>{item.id}</TableCell>
               <TableCell>{item.name}</TableCell>
@@ -41,6 +61,7 @@ const UsersPage: FC<UsersPageProps> = ({ }) => {
         </TableBody>
       </Table>
     </div>
+
   )
 }
 

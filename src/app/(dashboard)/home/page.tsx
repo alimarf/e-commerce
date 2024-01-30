@@ -31,15 +31,15 @@ const Home = () => {
       <div className="container mt-5">
         <Carousel autoPlay infiniteLoop showThumbs={false}>
           <div>
-            <img src="/banner-1.jpg" alt="image1" />
+            <img src="/banner-zivana1.jpeg" alt="image1" />
 
           </div>
           <div>
-            <img src="/banner-2.jpg" alt="image2" />
+            <img src="/banner-zivana2.jpeg" alt="image2" />
           </div>
-          <div>
+          {/* <div>
             <img src="/banner-3.jpg" alt="image3" />
-          </div>
+          </div> */}
         </Carousel>
       </div>
 
