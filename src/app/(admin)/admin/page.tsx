@@ -37,6 +37,8 @@ const ProductsPage: FC<ProductsPageProps> = ({}) => {
         ) : (
           <DataTable columns={columns} data={productsData.data} />
         )}
+
+        
       </div>
     </div>
   );

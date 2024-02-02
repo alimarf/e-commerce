@@ -12,7 +12,7 @@ const Header: FC<HeaderAdminProps> = ({}) => {
   return (
     <div className="flex flex-row items-center justify-between pb-3 mb-8 border-b border-border">
       <div>
-        {/* <div className="font-semibold">{session?.user?.name}</div> */}
+        <div className="font-semibold">Selamat Datang di Dashboard Admin Zevana Store</div>
       </div>
       <div></div>
     </div>

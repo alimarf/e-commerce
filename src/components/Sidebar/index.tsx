@@ -26,13 +26,13 @@ const Sidebar: FC<SidebarProps> = ({}) => {
   }
 
   return (
-    <div className="min-h-screen pb-12">
+    <div className="bg-gray-900 min-h-screen pb-12">
       <div className="px-3 py-2">
-        <h2 className="px-4 mb-2 text-lg font-semibold">Dashboard</h2>
+        <h2 className="px-6 mt-5 mb-2 py-2 text-lg font-semibold bg-white rounded text-gray-700">Admin Zevana</h2>
         <div className="space-y-3">
           <Button
             variant={"ghost"}
-            className="justify-start w-full rounded-none hover:text-primary"
+            className="justify-start w-full rounded-none  text-white rounded hover:text-black"
             onClick={() => router.push("/admin")}
           >
             <AiOutlineHome className="mr-2 text-lg" />
@@ -48,14 +48,14 @@ const Sidebar: FC<SidebarProps> = ({}) => {
             Users
           </Button> */}
 
-          {/* <Button
+          <Button
             variant={"ghost"}
-            className="justify-start w-full text-red-500 rounded-none hover:bg-red-200 hover:text-red-500"
+            className="justify-start w-full text-red-500 rounded-none rounded hover:bg-white hover:text-red-500"
             onClick={() => logout()}
           >
             <AiOutlineLogout className="mr-2 text-lg" />
             Logout
-          </Button> */}
+          </Button>
         </div>
       </div>
     </div>
