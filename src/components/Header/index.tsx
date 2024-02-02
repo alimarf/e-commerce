@@ -104,7 +104,7 @@ const Header: FC<HeaderProps> = ({}) => {
         </div>
 
 
-        {session === null ? (
+        {/* {session === null ? (
           <Button
             className="hidden lg:block text-black bg-transparent border-black focus:text-black focus:bg-transparent active:bg-transparent"
             variant="outline"
@@ -123,7 +123,7 @@ const Header: FC<HeaderProps> = ({}) => {
               Keluar
             </Button>
           </SignOutDialog>
-        )}
+        )} */}
 
         <Button
           variant="ghost"
