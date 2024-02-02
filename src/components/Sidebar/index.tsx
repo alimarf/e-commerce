@@ -20,6 +20,11 @@ interface SidebarProps {}
 const Sidebar: FC<SidebarProps> = ({}) => {
   const router = useRouter();
 
+  function logout() {
+    signOut()
+    router.push('/auth/admin/signin')
+  }
+
   return (
     <div className="min-h-screen pb-12">
       <div className="px-3 py-2">
@@ -46,7 +51,7 @@ const Sidebar: FC<SidebarProps> = ({}) => {
           <Button
             variant={"ghost"}
             className="justify-start w-full text-red-500 rounded-none hover:bg-red-200 hover:text-red-500"
-            onClick={() => signOut()}
+            onClick={() => logout()}
           >
             <AiOutlineLogout className="mr-2 text-lg" />
             Logout

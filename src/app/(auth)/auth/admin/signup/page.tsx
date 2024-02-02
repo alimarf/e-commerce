@@ -9,75 +9,55 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { signInFormSchema } from "@/lib/form-schema";
-import React, { FC, useState } from "react";
-
-import { z } from "zod";
+import { toast } from "@/components/ui/use-toast";
+import { signUpAdminFormSchema } from "@/lib/form-schema";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Metadata } from "next";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import ClipLoader from "react-spinners/ClipLoader";
-import { signIn } from "next-auth/react";
-import { useToast } from "@/components/ui/use-toast";
+import React, { FC, useState } from "react";
 import { useForm } from "react-hook-form";
+import ClipLoader from "react-spinners/ClipLoader";
+import { z } from "zod";
 
-interface SignInPageProps {}
+interface SignUpPageProps {}
 
-const SignInPage: FC<SignInPageProps> = ({}) => {
-  const form = useForm<z.infer<typeof signInFormSchema>>({
-    resolver: zodResolver(signInFormSchema),
-  });
-
+const SignUpPage: FC<SignUpPageProps> = ({}) => {
   const router = useRouter();
+
+  const form = useForm<z.infer<typeof signUpAdminFormSchema>>({
+    resolver: zodResolver(signUpAdminFormSchema),
+  });
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const { toast } = useToast();
-
-  const onSubmit = async (val: z.infer<typeof signInFormSchema>) => {
-    setIsLoading(true);
-    const authenticated = await signIn("credentials", {
-      ...val,
-      redirect: false,
-    });
-
-    console.log(authenticated);
-
-    if (authenticated?.error) {
+  const onSubmit = async (val: z.infer<typeof signUpAdminFormSchema>) => {
+    try {
+      setIsLoading(true);
+      await fetch("/api/sign-up", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(val),
+      });
+      await router.push("/auth/admin/signin");
+    } catch (error) {
       setIsLoading(false);
       toast({
-        title: "Sign In Failed",
-        description: "Email or Password maybe wrong",
+        title: "Error",
+        description: "Please Try Again",
       });
-
-      return;
-    }
-
-    const response = await fetch("/api/check-admin", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email: val.email }),
-    });
-
-    if (response.ok) {
-      const result = await response.json();
-      if (result.data === false) {
-        await router.push("/");
-      } else if (result.data === true) {
-        await router.push("/admin");
-      }
-    } else {
-      console.error("Error checking admin status");
+      console.log(error);
     }
   };
 
   return (
     <div className="relative w-full h-screen">
       <div className="absolute -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
-        <div className="mb-2 text-4xl font-semibold text-center">Grosir</div>
-
-        <div className="text-sm text-center text-gray-500">
-          Cari produk favorit Anda di web kami
+        <div className="mb-2 text-2xl font-semibold text-center">
+          Register Admin
+        </div>
+        <div className="text-sm text-gray-500">
+          Buat akun Admin Anda untuk mengelola produk
         </div>
 
         <Form {...form}>
@@ -85,6 +65,20 @@ const SignInPage: FC<SignInPageProps> = ({}) => {
             onSubmit={form.handleSubmit(onSubmit)}
             className="mt-5 space-y-5"
           >
+            <FormField
+              control={form.control}
+              name="name"
+              render={({ field }) => (
+                <FormItem>
+                  <FormControl>
+                    <Input placeholder="Masukkan nama anda" {...field} />
+                  </FormControl>
+
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
             <FormField
               control={form.control}
               name="email"
@@ -126,14 +120,14 @@ const SignInPage: FC<SignInPageProps> = ({}) => {
                   data-testid="loader"
                 />
               ) : (
-                "Masuk"
+                "Submit"
               )}
             </Button>
 
             <div className="text-sm text-center">
-              Belum memiliki akun?{" "}
-              <Link href="/auth/signup" className="text-primary font-semibold">
-                Daftar
+              Sudah punya akun?{" "}
+              <Link href="/auth/admin/signin" className="text-primary font-semibold">
+                Masuk
               </Link>
             </div>
           </form>
@@ -143,4 +137,4 @@ const SignInPage: FC<SignInPageProps> = ({}) => {
   );
 };
 
-export default SignInPage;
+export default SignUpPage;

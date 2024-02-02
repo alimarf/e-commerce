@@ -74,10 +74,10 @@ const SignInPage: FC<SignInPageProps> = ({}) => {
   return (
     <div className="relative w-full h-screen">
       <div className="absolute -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
-        <div className="mb-2 text-4xl font-semibold text-center">Grosir</div>
+        <div className="mb-2 text-4xl font-semibold text-center">Admin Panel</div>
 
         <div className="text-sm text-center text-gray-500">
-          Cari produk favorit Anda di web kami
+          Kelola produk kamu pada admin panel
         </div>
 
         <Form {...form}>

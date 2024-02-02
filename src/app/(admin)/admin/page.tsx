@@ -1,6 +1,6 @@
 "use client";
 
-import React, { FC } from "react";
+import React, { FC, useEffect, useState } from "react";
 import {
   Table,
   TableBody,
@@ -14,11 +14,46 @@ import { columns } from "../columns";
 import { Product } from "@prisma/client";
 import useSWR from "swr";
 import { fetcher } from "@/lib/utils";
+import { redirect, useRouter } from "next/navigation";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
 interface ProductsPageProps {}
 
+async function fetchCheckAdmin() {
+  const session = await getServerSession(authOptions);
+
+  console.log("session", session?.user);
+  const response = await fetch(
+    `/api/check-admin`,
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email: session?.user?.name }),
+    }
+  );
+  
+
+  if (response.ok) {
+    console.log('MASUK')
+    const result = await response.json();
+    // console.log("Bro", result.data);
+    // if (result.data === false) {
+    //   redirect("/admin");
+    // } else if (result.data === true) {
+    //   redirect("/");
+    // }
+
+    return result;
+  } else {
+    console.error("Error checking admin status");
+  }
+}
+
 const ProductsPage: FC<ProductsPageProps> = ({}) => {
-  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+  useEffect(() => {
+    fetchCheckAdmin();
+  }, []);
 
   const {
     data: productsData,
@@ -26,70 +61,7 @@ const ProductsPage: FC<ProductsPageProps> = ({}) => {
     error,
   } = useSWR(`api/products`, fetcher);
 
-  console.log("PRODUCTS", productsData);
-
-  const data = [
-    {
-      id: "a",
-      name: "ha",
-      description: "had",
-      image: "ah",
-      qty: 20,
-      price: 20000,
-      rating: 5,
-      createdAt: null,
-    },
-    {
-      id: "b",
-      name: "ha1",
-      description: "had1",
-      image: "ah1",
-      qty: 30,
-      price: 130000,
-      rating: 5,
-      createdAt: null,
-    },
-    {
-      id: "c",
-      name: "ha2",
-      description: "had2",
-      image: "ah2",
-      qty: 40,
-      price: 350000,
-      rating: 5,
-      createdAt: null,
-    },
-    // Add more data as needed
-  ];
-
   return (
-    // <div>
-    //   <h1>Products</h1>
-    //   <Table>
-    //     <TableHeader>
-    //       <TableRow>
-    //         <TableHead>No</TableHead>
-    //         <TableHead>Name</TableHead>
-    //         <TableHead>Price</TableHead>
-    //         <TableHead>Rating</TableHead>
-    //         <TableHead>Qty</TableHead>
-
-    //       </TableRow>
-    //     </TableHeader>
-    //     <TableBody>
-    //       {data.map((item) => (
-    //         <TableRow key={item.id}>
-    //           <TableCell>{item.id}</TableCell>
-    //           <TableCell>{item.name}</TableCell>
-    //           <TableCell>{item.price}</TableCell>
-    //           <TableCell>{item.rating}</TableCell>
-    //           <TableCell>{item.qty}</TableCell>
-    //         </TableRow>
-    //       ))}
-    //     </TableBody>
-
-    //   </Table>
-    // </div>
     <div>
       <div className="container mx-auto py-10">
         {error ? (
@@ -101,7 +73,6 @@ const ProductsPage: FC<ProductsPageProps> = ({}) => {
         )}
       </div>
     </div>
-    
   );
 };
 

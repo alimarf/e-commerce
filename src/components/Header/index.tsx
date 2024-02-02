@@ -6,7 +6,7 @@ import { Button } from "../ui/button";
 import Link from "next/link";
 
 import { Separator } from "@/components/ui/separator";
-import { useRouter } from "next/navigation";
+import { useRouter,usePathname } from "next/navigation";
 
 import SignOutDialog from "../SignOutDialog";
 import { useSession } from "next-auth/react";
@@ -16,6 +16,11 @@ interface HeaderProps {}
 const Header: FC<HeaderProps> = ({}) => {
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
+  const path = usePathname();
+
+  console.log('PATH', path);
+  
+
 
   const { data: session } = useSession();
   console.log(session);
@@ -86,19 +91,18 @@ const Header: FC<HeaderProps> = ({}) => {
 
         <div className="hidden lg:block">
           <ul className="mt-10 lg:mt-0 flex flex-row items-center justify-center gap-16">
-            <li className="text-xl">
+          <li className={`text-xl ${path === '/home' ? 'text-blue-500' : ''}`}>
               <a href="/home">Beranda</a>
             </li>
-            <li className="text-xl">
+            <li className={`text-xl ${path === '/products' ? 'text-blue-500' : ''}`}>
               <a href="/products">Produk</a>
             </li>
-            <li className="text-xl">
+            <li className={`text-xl ${path === '/shopping-conditions' ? 'text-blue-500' : ''}`}>
               <a href="/shopping-conditions">Ketentuan Belanja</a>
             </li>
           </ul>
         </div>
 
-        {/* TODO:: UNCOMMENT THIS CODE */}
 
         {session === null ? (
           <Button

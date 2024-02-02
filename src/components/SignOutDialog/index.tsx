@@ -27,9 +27,9 @@ const SignOutDialog: FC<SignOutDialogProps> = ({ children }) => {
       <AlertDialogTrigger asChild>{children}</AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>Are you sure want to Sign Out?</AlertDialogTitle>
+          <AlertDialogTitle>Apakah anda yakin ingin keluar?</AlertDialogTitle>
           <AlertDialogDescription>
-            You will be redirect to Sign In
+            Terimakasih telah mengunjungi web kami
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
