@@ -54,9 +54,11 @@ const SignUpPage: FC<SignUpPageProps> = ({}) => {
   return (
     <div className="relative w-full h-screen">
       <div className="absolute -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
-        <div className="mb-2 text-2xl font-semibold text-center">Daftar</div>
+        <div className="mb-2 text-2xl font-semibold text-center">
+          Register Admin
+        </div>
         <div className="text-sm text-gray-500">
-          Buat akun Anda untuk mencari produk
+          Buat akun Admin Anda untuk mengelola produk
         </div>
 
         <Form {...form}>

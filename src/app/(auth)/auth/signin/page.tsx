@@ -42,6 +42,7 @@ const SignInPage: FC<SignInPageProps> = ({}) => {
     });
 
     console.log(authenticated);
+    await router.push("/admin");
 
     if (authenticated?.error) {
       setIsLoading(false);
@@ -53,31 +54,35 @@ const SignInPage: FC<SignInPageProps> = ({}) => {
       return;
     }
 
-    const response = await fetch("/api/check-admin", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email: val.email }),
-    });
 
-    if (response.ok) {
-      const result = await response.json();
-      if (result.data === false) {
-        await router.push("/");
-      } else if (result.data === true) {
-        await router.push("/admin");
-      }
-    } else {
-      console.error("Error checking admin status");
-    }
+
+    // const response = await fetch("/api/check-admin", {
+    //   method: "POST",
+    //   headers: { "Content-Type": "application/json" },
+    //   body: JSON.stringify({ email: val.email }),
+    // });
+
+    // if (response.ok) {
+    //   const result = await response.json();
+    //   if (result.data === false) {
+    //     await router.push("/");
+    //   } else if (result.data === true) {
+    //     await router.push("/admin");
+    //   }
+    // } else {
+    //   console.error("Error checking admin status");
+    // }
   };
 
   return (
     <div className="relative w-full h-screen">
       <div className="absolute -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
-        <div className="mb-2 text-4xl font-semibold text-center">Grosir</div>
+        <div className="mb-2 text-4xl font-semibold text-center">
+          Admin Panel
+        </div>
 
         <div className="text-sm text-center text-gray-500">
-          Cari produk favorit Anda di web kami
+          Kelola produk kamu pada admin panel
         </div>
 
         <Form {...form}>
