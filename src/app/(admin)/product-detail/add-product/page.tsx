@@ -37,7 +37,6 @@ const page: FC<AddProductPageProps> = ({ }) => {
             .custom<File>((v) => v instanceof File, {
                 message: 'Image is required',
             }),
-        qty: z.string({required_error:"quantity required"}),
 
     })
 
@@ -56,7 +55,7 @@ const page: FC<AddProductPageProps> = ({ }) => {
         formData.append("price", values.price);
         formData.append("rating", values.rating);
         formData.append("image", values.image);
-        formData.append("qty", values.qty);
+
 
         try {
             setIsLoading(true);
@@ -197,19 +196,7 @@ const page: FC<AddProductPageProps> = ({ }) => {
                     />
 
 
-                    <FormField
-                        control={form.control}
-                        name="qty"
-                        render={({ field }) => (
-                            <FormItem>
-                                <FormLabel>Stok</FormLabel>
-                                <FormControl>
-                                    <Input type='number' placeholder="Masukkan stok" {...field} />
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
+              
 
                     <Button>
                         Simpan

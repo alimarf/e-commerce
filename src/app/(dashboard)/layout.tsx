@@ -5,7 +5,7 @@ import Header from "@/components/Header";
 import HeaderTop from "@/components/Header/HeaderTop";
 
 import Footer from "@/components/Footer";
-import NextAuthProvider from "@/context/NextAuthProvider";
+
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,19 +19,16 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-
   return (
     <html lang="en">
       <body className={inter.className}>
         <main>
-          <NextAuthProvider>
-            <div>
-              <HeaderTop/>
-              <Header />
-              {children}
-              <Footer />
-            </div>
-          </NextAuthProvider>
+          <div>
+            <HeaderTop />
+            <Header />
+            {children}
+            <Footer />
+          </div>
         </main>
       </body>
     </html>

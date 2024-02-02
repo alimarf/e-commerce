@@ -11,36 +11,36 @@ const Footer = () => {
 
           <div className="mb-12">
             <h1 className="text-4xl font-bold">Zivana Store</h1>
-            <p className="text-gray-500">
+            <div className="text-gray-500">
               © Zivana store All Rights Reserved 2024.
-            </p>
+            </div>
           </div>
 
           <div className="mb-12">
             <h1 className="text-2xl font-bold">Tentang Kami</h1>
-            <p className="text-gray-500">
+            <div className="text-gray-500">
               Kami adalah toko grosir yang terlengkap di indonesia. <br />
               Kami menyediakan semua produk yang anda cari dan inginkan, seperti
               bahan pangan dan sebagainya
-            </p>
+            </div>
           </div>
 
           <div className="mb-12">
             <h1 className="text-2xl font-bold">Kontak Kami</h1>
-            <p className="text-gray-500">
+            <div className="text-gray-500">
               <div className="flex items-center gap-x-2">
                 <FaWhatsapp />
-                <p>+62 123 456 789</p>
+                <div>+62 123 456 789</div>
               </div>
               <div className="flex items-center gap-x-2">
                 <FaSquareXTwitter />
-                <p>@ZivannaStore</p>
+                <div>@ZivannaStore</div>
               </div>
               <div className="flex items-center gap-x-2">
                 <FaInstagram />
-                <p>@ZivannaStore</p>
+                <div>@ZivannaStore</div>
               </div>
-            </p>
+            </div>
           </div>
         </div>
       </div>

@@ -6,7 +6,7 @@ import { Button } from "../ui/button";
 import Link from "next/link";
 
 import { Separator } from "@/components/ui/separator";
-import { useRouter,usePathname } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 
 import SignOutDialog from "../SignOutDialog";
 import { useSession } from "next-auth/react";
@@ -18,12 +18,7 @@ const Header: FC<HeaderProps> = ({}) => {
   const router = useRouter();
   const path = usePathname();
 
-  console.log('PATH', path);
-  
-
-
-  const { data: session } = useSession();
-  console.log(session);
+  console.log("PATH", path);
 
   return (
     <div>
@@ -102,7 +97,6 @@ const Header: FC<HeaderProps> = ({}) => {
             </li>
           </ul>
         </div>
-
 
         {/* {session === null ? (
           <Button

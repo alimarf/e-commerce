@@ -24,5 +24,4 @@ model Product {
     price        Int
     rating       Int
     image        String
-    qty          Int
 }

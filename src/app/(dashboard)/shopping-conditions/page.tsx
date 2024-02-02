@@ -16,9 +16,9 @@ const ShoppingConditions: FC<ShoppingConditionsProps> = ({ }) => {
             <CardTitle>Step 1</CardTitle>
           </CardHeader>
           <CardContent>
-            <p>
+            <div>
               Pastikan Anda Sign In Terlebih dahulu sebelum order pesanan, tombol login berada di pojok kanan atas
-            </p>
+            </div>
             <img src="/step1.png" className='' />
           </CardContent>
 
@@ -29,10 +29,10 @@ const ShoppingConditions: FC<ShoppingConditionsProps> = ({ }) => {
             <CardTitle>Step 2</CardTitle>
           </CardHeader>
           <CardContent>
-            <p>
+            <div>
               Setelah login,
               silahkan klik order now pada produk yang anda inginkan
-            </p>
+            </div>
 
             <img src="/step2.png" className='' />
           </CardContent>
@@ -43,9 +43,9 @@ const ShoppingConditions: FC<ShoppingConditionsProps> = ({ }) => {
             <CardTitle>Step 3</CardTitle>
           </CardHeader>
           <CardContent>
-            <p>
+            <div>
               Setelah Masuk kedalam detail produk lanjutkan klik tombol order now
-            </p>
+            </div>
             <img src="/step3.png" className='' />
           </CardContent>
 
@@ -56,10 +56,10 @@ const ShoppingConditions: FC<ShoppingConditionsProps> = ({ }) => {
             <CardTitle>Step 4</CardTitle>
           </CardHeader>
           <CardContent>
-            <p>
+            <div>
               Setelah klik tombol order now, anda akan di arahkan ke whatsapp 
               dan silahkan lakukan transaksi selanjutnya
-            </p>
+            </div>
           </CardContent>
         </Card>
       </div>

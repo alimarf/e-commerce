@@ -32,7 +32,6 @@ export type Product = {
   price: number;
   rating: number;
   image: string;
-  qty: number;
 };
 
 export const columns: ColumnDef<Product>[] = [
@@ -73,10 +72,6 @@ export const columns: ColumnDef<Product>[] = [
   {
     accessorKey: "rating",
     header: "Rating",
-  },
-  {
-    accessorKey: "qty",
-    header: "Stok",
   },
 
   {
