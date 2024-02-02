@@ -13,16 +13,17 @@ model User {
     email     String    @unique
     name      String?
     password  String
-    admin     Boolean @default(false)
+    admin     Boolean   @default(false)
 }
 
 model Product {
-    id          String    @id @default(cuid())
-    createdAt   DateTime? @default(now())
-    name        String
-    description String?
-    price       Int
-    rating      Int
-    image       String
-    qty         Int
+    id           String    @id @default(cuid())
+    createdAt    DateTime? @default(now())
+    kode_product String? 
+    name         String
+    description  String?
+    price        Int
+    rating       Int
+    image        String
+    qty          Int
 }

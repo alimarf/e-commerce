@@ -1,3 +1,4 @@
+import { formatRupiah } from "@/lib/utils";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
@@ -101,7 +102,7 @@ const ProductCard: React.FC<propsType> = ({
         <div>{generateRating(rating)}</div>
   
         <div className="font-bold flex gap-4">
-          Rp.{price}
+          {formatRupiah(parseInt(price))}
         </div>
       </div>
   

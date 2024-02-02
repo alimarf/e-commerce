@@ -45,12 +45,14 @@ const authOptions: NextAuthOptions = {
 
         return null;
       },
+      
     }),
   ],
   pages: {
     signIn: "/auth/signin",
     newUser: "/auth/signup",
   },
+  
   callbacks: {
     jwt({ token, account, user }) {
       if (account) {
@@ -63,6 +65,7 @@ const authOptions: NextAuthOptions = {
       return { ...session };
     },
   },
+  
 };
 
 const handler = NextAuth(authOptions);
