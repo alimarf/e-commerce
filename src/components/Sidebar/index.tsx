@@ -49,7 +49,7 @@ const Sidebar: FC<SidebarProps> = ({}) => {
           <SignOutDialog>
             <Button
               variant={"ghost"}
-              className="justify-start w-full text-red-500 rounded-none hover:bg-red-200 hover:text-red-500"
+              className="justify-start w-full rounded text-red-500 hover:bg-red-200 hover:text-red-500"
               // onClick={() => signOut()}
             >
               <AiOutlineLogout className="mr-2 text-lg" />

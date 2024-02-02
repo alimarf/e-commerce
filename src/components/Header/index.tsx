@@ -67,7 +67,7 @@ const Header: FC<HeaderProps> = ({}) => {
               </li>
             </ul>
 
-            <Button
+            {/* <Button
               className="mt-6 text-white bg-transparent focus:text-white focus:bg-transparent active:bg-transparent"
               variant="outline"
               onClick={() => {
@@ -75,7 +75,7 @@ const Header: FC<HeaderProps> = ({}) => {
               }}
             >
               Masuk
-            </Button>
+            </Button> */}
           </div>
         </div>
       )}

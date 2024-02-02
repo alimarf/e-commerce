@@ -135,12 +135,12 @@ const SignInPage: FC<SignInPageProps> = ({}) => {
               )}
             </Button>
 
-            <div className="text-sm text-center">
+            {/* <div className="text-sm text-center">
               Belum memiliki akun?{" "}
               <Link href="/auth/signup" className="text-primary font-semibold">
                 Daftar
               </Link>
-            </div>
+            </div> */}
           </form>
         </Form>
       </div>
