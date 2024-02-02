@@ -14,12 +14,12 @@ const HeaderTop = () => {
               </a>
 
             </div>
-            <div className="header_top__icon_wrapper">
+            {/* <div className="header_top__icon_wrapper">
               <a href="http://">
                 <BsTwitter />
               </a>
 
-            </div>
+            </div> */}
             <div className="header_top__icon_wrapper">
               <a href="http://">
                 <BsInstagram />

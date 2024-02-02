@@ -91,13 +91,13 @@ const Header: FC<HeaderProps> = ({}) => {
 
         <div className="hidden lg:block">
           <ul className="mt-10 lg:mt-0 flex flex-row items-center justify-center gap-16">
-          <li className={`text-xl ${path === '/home' ? 'text-blue-500' : ''}`}>
+          <li className={`text-xl ${path === '/home' ? 'text-orange-500' : ''}`}>
               <a href="/home">Beranda</a>
             </li>
-            <li className={`text-xl ${path === '/products' ? 'text-blue-500' : ''}`}>
+            <li className={`text-xl ${path === '/products' ? 'text-orange-500' : ''}`}>
               <a href="/products">Produk</a>
             </li>
-            <li className={`text-xl ${path === '/shopping-conditions' ? 'text-blue-500' : ''}`}>
+            <li className={`text-xl ${path === '/shopping-conditions' ? 'text-orange-500' : ''}`}>
               <a href="/shopping-conditions">Ketentuan Belanja</a>
             </li>
           </ul>
