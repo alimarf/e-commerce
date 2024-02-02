@@ -14,18 +14,19 @@ import {
 } from "react-icons/ai";
 import { useRouter } from "next/navigation";
 import { signOut } from "next-auth/react";
+import SignOutDialog from "../SignOutDialog";
 
 interface SidebarProps {}
 
 const Sidebar: FC<SidebarProps> = ({}) => {
   const router = useRouter();
 
-
-
   return (
     <div className="bg-gray-900 min-h-screen pb-12">
       <div className="px-3 py-2">
-        <h2 className="px-6 mt-5 mb-2 py-2 text-lg font-semibold bg-white rounded text-gray-700">Admin Zevana</h2>
+        <h2 className="px-6 mt-5 mb-2 py-2 text-lg font-semibold bg-white rounded text-gray-700">
+          Admin Zevana
+        </h2>
         <div className="space-y-3">
           <Button
             variant={"ghost"}
@@ -45,14 +46,16 @@ const Sidebar: FC<SidebarProps> = ({}) => {
             Users
           </Button> */}
 
-          <Button
-            variant={"ghost"}
-            className="justify-start w-full text-red-500 rounded-none hover:bg-red-200 hover:text-red-500"
-            onClick={() => signOut()}
-          >
-            <AiOutlineLogout className="mr-2 text-lg" />
-            Logout
-          </Button>
+          <SignOutDialog>
+            <Button
+              variant={"ghost"}
+              className="justify-start w-full text-red-500 rounded-none hover:bg-red-200 hover:text-red-500"
+              // onClick={() => signOut()}
+            >
+              <AiOutlineLogout className="mr-2 text-lg" />
+              Logout
+            </Button>
+          </SignOutDialog>
         </div>
       </div>
     </div>
