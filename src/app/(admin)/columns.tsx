@@ -38,7 +38,7 @@ export type Product = {
 export const columns: ColumnDef<Product>[] = [
   {
     accessorKey: "image",
-    header: "Image",
+    header: "Gambar",
     cell: ({ row }) => (
       <Image
         src={`/${row.original.image}`}
@@ -56,7 +56,7 @@ export const columns: ColumnDef<Product>[] = [
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Name
+          Nama
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
@@ -64,11 +64,11 @@ export const columns: ColumnDef<Product>[] = [
   },
   {
     accessorKey: "description",
-    header: "Description",
+    header: "Deskripsi",
   },
   {
     accessorKey: "price",
-    header: "Price",
+    header: "Harga",
   },
   {
     accessorKey: "rating",
@@ -76,7 +76,7 @@ export const columns: ColumnDef<Product>[] = [
   },
   {
     accessorKey: "qty",
-    header: "Stock",
+    header: "Stok",
   },
 
   {

@@ -31,17 +31,17 @@ const Sidebar: FC<SidebarProps> = ({}) => {
             onClick={() => router.push("/admin")}
           >
             <AiOutlineHome className="mr-2 text-lg" />
-            Products
+            Produk
           </Button>
 
-          <Button
+          {/* <Button
             variant={"ghost"}
             className="justify-start w-full rounded-none hover:text-primary"
             onClick={() => router.push("/users")}
           >
             <AiOutlineUsergroupAdd className="mr-2 text-lg" />
             Users
-          </Button>
+          </Button> */}
 
           <Button
             variant={"ghost"}

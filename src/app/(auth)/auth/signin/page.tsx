@@ -56,21 +56,19 @@ const SignInPage: FC<SignInPageProps> = ({}) => {
     const response = await fetch("/api/check-admin", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({email: val.email}),
+      body: JSON.stringify({ email: val.email }),
     });
 
     if (response.ok) {
       const result = await response.json();
-      if(result.data === false) {
+      if (result.data === false) {
         await router.push("/");
-      } else if(result.data === true){
+      } else if (result.data === true) {
         await router.push("/admin");
       }
     } else {
       console.error("Error checking admin status");
     }
-
-
   };
 
   return (
@@ -78,8 +76,8 @@ const SignInPage: FC<SignInPageProps> = ({}) => {
       <div className="absolute -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
         <div className="mb-2 text-4xl font-semibold text-center">Grosir</div>
 
-        <div className="text-sm text-gray-500">
-          Search your favorite products in the world
+        <div className="text-sm text-center text-gray-500">
+          Cari produk favorit Anda
         </div>
 
         <Form {...form}>
@@ -93,7 +91,7 @@ const SignInPage: FC<SignInPageProps> = ({}) => {
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
-                    <Input placeholder="Enter your email" {...field} />
+                    <Input placeholder="Masukkan email anda" {...field} />
                   </FormControl>
 
                   <FormMessage />
@@ -109,7 +107,7 @@ const SignInPage: FC<SignInPageProps> = ({}) => {
                   <FormControl>
                     <Input
                       type="password"
-                      placeholder="Enter your password"
+                      placeholder="Masukkan password anda"
                       {...field}
                     />
                   </FormControl>
@@ -128,14 +126,14 @@ const SignInPage: FC<SignInPageProps> = ({}) => {
                   data-testid="loader"
                 />
               ) : (
-                "SignIn"
+                "Masuk"
               )}
             </Button>
 
             <div className="text-sm text-center">
-              Don`t have an account{" "}
-              <Link href="/auth/signup" className="text-primary">
-                Sign Up
+              Belum memiliki akun?{" "}
+              <Link href="/auth/signup" className="text-primary font-semibold">
+                Daftar
               </Link>
             </div>
           </form>

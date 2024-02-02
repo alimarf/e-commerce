@@ -94,9 +94,9 @@ const page: FC<AddProductPageProps> = ({ }) => {
                         name="name"
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel>Product Name</FormLabel>
+                                <FormLabel>Nama Produk</FormLabel>
                                 <FormControl>
-                                    <Input placeholder="Enter your Product Name" {...field} />
+                                    <Input placeholder="Masukkan nama produk" {...field} />
                                 </FormControl>
 
                                 <FormMessage />
@@ -109,10 +109,10 @@ const page: FC<AddProductPageProps> = ({ }) => {
                         name="description"
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel>Description</FormLabel>
+                                <FormLabel>Deskripsi</FormLabel>
                                 <FormControl>
                                     {/* <Input placeholder="Enter your Description" {...field} /> */}
-                                    <Textarea placeholder="Type your description here." {...field} />
+                                    <Textarea placeholder="Masukkan deskripsi produk" {...field} />
                                 </FormControl>
 
                                 <FormMessage />
@@ -126,9 +126,9 @@ const page: FC<AddProductPageProps> = ({ }) => {
                         name="price"
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel>Price</FormLabel>
+                                <FormLabel>Harga</FormLabel>
                                 <FormControl>
-                                    <Input type='number' placeholder="Enter price" {...field} />
+                                    <Input type='number' placeholder="Masukkan harga" {...field} />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -142,7 +142,7 @@ const page: FC<AddProductPageProps> = ({ }) => {
                             <FormItem>
                                 <FormLabel>Rating</FormLabel>
                                 <FormControl>
-                                    <Input readOnly type='number' placeholder="Enter rating" {...field} max={5} min={0} maxLength={1}/>
+                                    <Input readOnly type='number' placeholder="Masukkan rating" {...field} max={5} min={0} maxLength={1}/>
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -183,9 +183,9 @@ const page: FC<AddProductPageProps> = ({ }) => {
                         name="image"
                         render={({ field: { ref, name, onBlur, onChange } }) => (
                             <FormItem>
-                                <FormLabel>Select Image</FormLabel>
+                                <FormLabel>Pilih gambar</FormLabel>
                                 <FormControl>
-                                    <Input type='file' placeholder="Select image" onChange={(e) => {
+                                    <Input type='file' placeholder="Pilih gambar" onChange={(e) => {
                                         const file = e.target.files?.[0];
                                         onChange(e.target.files?.[0]);
                                         //setImagePreview(file ? URL.createObjectURL(file) : null);
@@ -202,9 +202,9 @@ const page: FC<AddProductPageProps> = ({ }) => {
                         name="qty"
                         render={({ field }) => (
                             <FormItem>
-                                <FormLabel>Quantity</FormLabel>
+                                <FormLabel>Stok</FormLabel>
                                 <FormControl>
-                                    <Input type='number' placeholder="Enter Quantity" {...field} />
+                                    <Input type='number' placeholder="Masukkan stok" {...field} />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -212,7 +212,7 @@ const page: FC<AddProductPageProps> = ({ }) => {
                     />
 
                     <Button>
-                        Save
+                        Simpan
                     </Button>
 
                 </form>

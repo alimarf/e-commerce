@@ -20,7 +20,6 @@ import { useForm } from "react-hook-form";
 import ClipLoader from "react-spinners/ClipLoader";
 import { z } from "zod";
 
-
 interface SignUpPageProps {}
 
 const SignUpPage: FC<SignUpPageProps> = ({}) => {
@@ -32,8 +31,6 @@ const SignUpPage: FC<SignUpPageProps> = ({}) => {
 
   const [isLoading, setIsLoading] = useState(false);
 
-
-  
   const onSubmit = async (val: z.infer<typeof signUpFormSchema>) => {
     try {
       setIsLoading(true);
@@ -57,9 +54,9 @@ const SignUpPage: FC<SignUpPageProps> = ({}) => {
   return (
     <div className="relative w-full h-screen">
       <div className="absolute -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
-        <div className="mb-2 text-2xl font-semibold text-center">Sign Up</div>
+        <div className="mb-2 text-2xl font-semibold text-center">Daftar</div>
         <div className="text-sm text-gray-500">
-          Create your account to search products
+          Buat akun Anda untuk mencari produk
         </div>
 
         <Form {...form}>
@@ -73,7 +70,7 @@ const SignUpPage: FC<SignUpPageProps> = ({}) => {
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
-                    <Input placeholder="Enter your name" {...field} />
+                    <Input placeholder="Masukkan nama anda" {...field} />
                   </FormControl>
 
                   <FormMessage />
@@ -87,7 +84,7 @@ const SignUpPage: FC<SignUpPageProps> = ({}) => {
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
-                    <Input placeholder="Enter your email" {...field} />
+                    <Input placeholder="Masukkan email anda" {...field} />
                   </FormControl>
 
                   <FormMessage />
@@ -103,7 +100,7 @@ const SignUpPage: FC<SignUpPageProps> = ({}) => {
                   <FormControl>
                     <Input
                       type="password"
-                      placeholder="Enter your password"
+                      placeholder="Masukkan password anda"
                       {...field}
                     />
                   </FormControl>
@@ -113,7 +110,6 @@ const SignUpPage: FC<SignUpPageProps> = ({}) => {
               )}
             />
 
-            
             <Button className="w-full">
               {isLoading ? (
                 <ClipLoader
@@ -128,9 +124,9 @@ const SignUpPage: FC<SignUpPageProps> = ({}) => {
             </Button>
 
             <div className="text-sm text-center">
-              Already have an account{" "}
-              <Link href="/auth/signin" className="text-primary">
-                Sign In
+              Sudah punya akun?{" "}
+              <Link href="/auth/signin" className="text-primary font-semibold">
+                Masuk
               </Link>
             </div>
           </form>

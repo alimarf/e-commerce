@@ -120,7 +120,7 @@ const Editpage: FC<EditProductPageProps> = ({ }) => {
 
   return (
     <div>
-      <div className="mb-2">Edit Product</div>
+      <div className="mb-2">Edit Produk</div>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="mt-5 space-y-5">
           <FormField
@@ -128,9 +128,9 @@ const Editpage: FC<EditProductPageProps> = ({ }) => {
             name="name"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Product Name</FormLabel>
+                <FormLabel>Nama Produk</FormLabel>
                 <FormControl>
-                  <Input placeholder="Enter your Product Name" {...field} />
+                  <Input placeholder="Masukkan nama produk" {...field} />
                 </FormControl>
 
                 <FormMessage />
@@ -143,11 +143,11 @@ const Editpage: FC<EditProductPageProps> = ({ }) => {
             name="description"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Description</FormLabel>
+                <FormLabel>Deskripsi</FormLabel>
                 <FormControl>
                   {/* <Input placeholder="Enter your Description" {...field} /> */}
                   <Textarea
-                    placeholder="Type your description here."
+                    placeholder="Masukkan deskripsi produk"
                     {...field}
                   />
                 </FormControl>
@@ -162,9 +162,9 @@ const Editpage: FC<EditProductPageProps> = ({ }) => {
             name="price"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Price</FormLabel>
+                <FormLabel>Harga</FormLabel>
                 <FormControl>
-                  <Input type="number" placeholder="Enter price" {...field} />
+                  <Input type="number" placeholder="Masukkan harga" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -178,7 +178,7 @@ const Editpage: FC<EditProductPageProps> = ({ }) => {
               <FormItem>
                 <FormLabel>Rating</FormLabel>
                 <FormControl>
-                  <Input type="number" readOnly placeholder="Enter rating" {...field} />
+                  <Input type="number" readOnly placeholder="Masukkan rating" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -268,11 +268,11 @@ const Editpage: FC<EditProductPageProps> = ({ }) => {
             name="image"
             render={({ field: { ref, name, onBlur, onChange } }) => (
               <FormItem>
-                <FormLabel>Select Image</FormLabel>
+                <FormLabel>Pilih Gambar</FormLabel>
                 <FormControl>
                   <Input
                     type="file"
-                    placeholder="Select image"
+                    placeholder="Pilih gambar"
                     onChange={(e) => {
                       const file = e.target.files?.[0];
                       // Allow clearing the current selection
@@ -290,16 +290,16 @@ const Editpage: FC<EditProductPageProps> = ({ }) => {
             name="qty"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Quantity</FormLabel>
+                <FormLabel>Stok</FormLabel>
                 <FormControl>
-                  <Input type="number" placeholder="Enter Quantity" {...field} />
+                  <Input type="number" placeholder="Masukkan stok" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
             )}
           />
 
-          <Button>Save</Button>
+          <Button>Simpan</Button>
         </form>
       </Form>
     </div>

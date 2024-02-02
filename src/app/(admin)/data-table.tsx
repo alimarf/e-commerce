@@ -58,14 +58,14 @@ export function DataTable<TData, TValue>({
     <div>
       <div className="flex items-center justify-between py-4">
         <Input
-          placeholder="Filter name of products"
+          placeholder="Filter nama produk"
           value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}
           onChange={(event) =>
             table.getColumn("name")?.setFilterValue(event.target.value)
           }
           className="max-w-sm"
         />
-       <Button onClick={() => router.push("/product-detail/add-product")}>Add Product</Button>
+       <Button onClick={() => router.push("/product-detail/add-product")}>Tambah Produk</Button>
       </div>
       <div className="rounded-md border">
         <Table>
@@ -110,7 +110,7 @@ export function DataTable<TData, TValue>({
                   colSpan={columns.length}
                   className="h-24 text-center"
                 >
-                  No results.
+                  Data tidak ditemukan
                 </TableCell>
               </TableRow>
             )}
