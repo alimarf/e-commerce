@@ -5,6 +5,7 @@ import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import prisma from "../../../../../lib/prisma";
 import { formatRupiah } from "@/lib/utils";
 import Image from "next/image";
+import { button } from "@material-tailwind/react";
 
 
 type paramsType = {
@@ -86,30 +87,39 @@ const ProductDetail: FC<ProductDetailProps> = async ({ params }) => {
   };
 
   return (
-    <div className="flex">
-      <div className="w-1/2 p-20">
-        <Image
-          className="w-full h-auto"
-          src={`/${product?.image}`}
-          width={200}
-          height={300}
-          alt={product?.name!}
-        />
-      </div>
-      <div className="w-1/2 p-20">
-        <h1 className="text-2xl font-bold mb-2">{product?.name}</h1>
-        <h3 className="text-2m mb-2">{product?.description}</h3>
-        <div>{generateRating(product?.rating!)}</div>
-        <p className="text-lg mb-4">{formatRupiah(product?.price!)} </p>
-        {/* Add more details here */}
+    <div>
+      <div className="m-4 mx-auto max-w-screen-lg rounded-md border border-gray-100 text-gray-600 shadow-md" >
+        <div className="relative flex h-full flex-col text-gray-600 md:flex-row">
+          <div className="relative p-8 md:w-4/6">
+            <div className="flex flex-col md:flex-row">
+              <h2 className="mb-2 text-2xl font-black">{product?.name}</h2>
 
+            </div>
+            <p className="mt-3 font-sans text-base tracking-normal">{product?.description}</p>
+            {/* <div>{generateRating(product?.rating!)}</div> */}
+            <div className="flex flex-col md:flex-row md:items-end">
+              <p className="mt-6 text-4xl font-black">{formatRupiah(product?.price!)}</p>
+              <span className="ml-2 text-xs uppercase">Stok {product?.qty} Pcs</span>
+            </div>
+            <div className="mt-8 flex flex-col sm:flex-row">
+              <a href="https://wa.me/6289686946758?text=Hi%2C%20I%20want%20to%20order%20" target="blank" className="flex items-center justify-center rounded-md bg-slate-900 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-blue-300">
+                <svg xmlns="http://www.w3.org/2000/svg" className="mr-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                </svg>
+                Beli Sekarang
+              </a>
 
-     
-        <div className="bg-primary text-white text-[14px] md:text-[16px] p-2 px-4 rounded-lg inline-block cursor-pointer hover:bg-blackish">
-          <a href="https://wa.me/6289686946758?text=Hi%2C%20I%20want%20to%20order%20" target="blank">Order Now</a>
+            </div>
+          </div>
+          <div className="mx-auto flex items-center px-5 pt-1 md:p-8">
+            <img className="block h-auto max-w-full rounded-md shadow-lg" src={`/${product?.image}`} width={250} alt="Shop image" />
+          </div>
         </div>
       </div>
+      <div className="pt-60"></div>
     </div>
+
+
   );
 };
 
