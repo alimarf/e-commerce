@@ -99,7 +99,6 @@ const ProductDetail: FC<ProductDetailProps> = async ({ params }) => {
             {/* <div>{generateRating(product?.rating!)}</div> */}
             <div className="flex flex-col md:flex-row md:items-end">
               <div className="mt-6 text-4xl font-black">{formatRupiah(product?.price!)}</div>
-              <span className="ml-2 text-xs uppercase">Stok {product?.qty} Pcs</span>
             </div>
             <div className="mt-8 flex flex-col sm:flex-row">
               <a href="https://wa.me/6289686946758?text=Hi%2C%20I%20want%20to%20order%20" target="blank" className="flex items-center justify-center rounded-md bg-slate-900 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-blue-300">

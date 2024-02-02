@@ -25,10 +25,9 @@ export async function POST(request: Request) {
       price: zfd.numeric(z.number()),
       rating: zfd.numeric(z.number().min(1).max(5)),
       image: zfd.file(),
-      qty: zfd.numeric(z.number()),
     });
 
-    const { name, description, price, rating, image, qty } = schema.parse(
+    const { name, description, price, rating, image } = schema.parse(
       await formData
     );
 
@@ -39,7 +38,6 @@ export async function POST(request: Request) {
         price: price,
         rating: rating,
         image: "images/" + image.name,
-        qty: qty,
       },
     });
 
@@ -59,7 +57,6 @@ export async function POST(request: Request) {
         price: result.price,
         rating: result.rating,
         image: "images/" + image.name,
-        qty: result.qty,
       },
     });
   } catch (error) {
@@ -200,10 +197,9 @@ export async function PUT(request: Request) {
       price: zfd.numeric(z.number()),
       rating: zfd.numeric(z.number().min(1).max(5)),
       image: zfd.file(),
-      qty: zfd.numeric(),
     });
 
-    const { name, description, price, rating, image, qty } = schema.parse(
+    const { name, description, price, rating, image } = schema.parse(
       await formData
     );
 
@@ -217,7 +213,6 @@ export async function PUT(request: Request) {
         price: price || product.price,
         rating: rating || product.rating,
         image: image ? "images/" + image.name : product.image,
-        qty: qty !== undefined && qty !== null ? qty : product.qty,
       },
     });
 
@@ -261,7 +256,7 @@ export async function DELETE(request: Request) {
           headers: headers,
         }
       );
-      return response
+      return response;
     }
 
     await prisma.product.delete({
@@ -282,7 +277,6 @@ export async function DELETE(request: Request) {
     );
 
     return response;
-    
   } catch (error) {
     console.error("Failed to deleted products:", error);
 
@@ -290,7 +284,7 @@ export async function DELETE(request: Request) {
       JSON.stringify({
         status: 500,
         message: "Internal Server Error",
-        error: error
+        error: error,
       }),
       {
         status: 500,

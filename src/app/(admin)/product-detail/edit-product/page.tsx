@@ -44,7 +44,7 @@ const Editpage: FC<EditProductPageProps> = ({ }) => {
       .custom<File>((v) => v instanceof File, {
         message: 'Image is required',
       }),
-    qty: z.string({ required_error: "quantity required" }),
+
 
   });
 
@@ -56,7 +56,7 @@ const Editpage: FC<EditProductPageProps> = ({ }) => {
       price: originalObject.price.toString(),
       rating: originalObject.rating.toString(),
       image: originalObject.image.toString(),
-      qty: originalObject.qty.toString(),
+
     },
   });
 
@@ -91,7 +91,7 @@ const Editpage: FC<EditProductPageProps> = ({ }) => {
     formData.append("description", values.description);
     formData.append("price", values.price);
     formData.append("rating", values.rating);
-    formData.append("qty", values.qty.toString());
+
     // Conditionally append image data
     if (values.image instanceof File) {
       formData.append("image", values.image);
@@ -285,19 +285,7 @@ const Editpage: FC<EditProductPageProps> = ({ }) => {
             )}
           />
 
-          <FormField
-            control={form.control}
-            name="qty"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Stok</FormLabel>
-                <FormControl>
-                  <Input type="number" placeholder="Masukkan stok" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+   
 
           <Button>Simpan</Button>
         </form>
