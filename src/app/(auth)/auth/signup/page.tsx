@@ -119,7 +119,7 @@ const SignUpPage: FC<SignUpPageProps> = ({}) => {
                   data-testid="loader"
                 />
               ) : (
-                "Sign Up"
+                "Submit"
               )}
             </Button>
 
