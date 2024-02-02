@@ -32,7 +32,7 @@ const ProductCard: React.FC<propsType> = ({
   price,
   id,
 }) => {
-  const { data: session } = useSession();
+
   const router = useRouter();
   const generateRating = (rating: number) => {
     switch (rating) {

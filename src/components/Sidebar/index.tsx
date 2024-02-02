@@ -48,14 +48,14 @@ const Sidebar: FC<SidebarProps> = ({}) => {
             Users
           </Button> */}
 
-          <Button
+          {/* <Button
             variant={"ghost"}
             className="justify-start w-full text-red-500 rounded-none hover:bg-red-200 hover:text-red-500"
             onClick={() => logout()}
           >
             <AiOutlineLogout className="mr-2 text-lg" />
             Logout
-          </Button>
+          </Button> */}
         </div>
       </div>
     </div>
