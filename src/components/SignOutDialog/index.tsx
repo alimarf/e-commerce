@@ -29,7 +29,7 @@ const SignOutDialog: FC<SignOutDialogProps> = ({ children }) => {
         <AlertDialogHeader>
           <AlertDialogTitle>Apakah anda yakin ingin keluar?</AlertDialogTitle>
           <AlertDialogDescription>
-            Terimakasih telah mengunjungi web kami
+            Anda akan diarahkan ke halaman login
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
