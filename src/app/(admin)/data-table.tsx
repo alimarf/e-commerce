@@ -65,7 +65,7 @@ export function DataTable<TData, TValue>({
           }
           className="max-w-sm"
         />
-       <Button onClick={() => router.push("/product-detail/add-product")}>Tambah Produk</Button>
+       <Button className="bg-gray-700" onClick={() => router.push("/product-detail/add-product")}>Tambah Produk</Button>
       </div>
       <div className="rounded-md border">
         <Table>
@@ -74,7 +74,7 @@ export function DataTable<TData, TValue>({
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
                   return (
-                    <TableHead key={header.id}>
+                    <TableHead style={{ backgroundColor: "black", color:"white" }} key={header.id}>
                       {header.isPlaceholder
                         ? null
                         : flexRender(
