@@ -42,7 +42,7 @@ const Header: FC<HeaderProps> = ({}) => {
                   }}
                   href="/home"
                 >
-                  Home
+                  Beranda
                 </Link>
               </li>
               <li className="mb-4">
@@ -52,7 +52,7 @@ const Header: FC<HeaderProps> = ({}) => {
                   }}
                   href="/products"
                 >
-                  Products
+                  Produk
                 </Link>
               </li>
               <li className="mb-4">
@@ -62,7 +62,7 @@ const Header: FC<HeaderProps> = ({}) => {
                   }}
                   href="/shopping-conditions"
                 >
-                  Shopping Conditions
+                  Ketentuan Belanja
                 </Link>
               </li>
             </ul>
@@ -74,7 +74,7 @@ const Header: FC<HeaderProps> = ({}) => {
                 router.push("/auth/signin");
               }}
             >
-              Sign In
+              Masuk
             </Button>
           </div>
         </div>
@@ -87,13 +87,13 @@ const Header: FC<HeaderProps> = ({}) => {
         <div className="hidden lg:block">
           <ul className="mt-10 lg:mt-0 flex flex-row items-center justify-center gap-16">
             <li className="text-xl">
-              <a href="/home">Home</a>
+              <a href="/home">Beranda</a>
             </li>
             <li className="text-xl">
-              <a href="/products">Products</a>
+              <a href="/products">Produk</a>
             </li>
             <li className="text-xl">
-              <a href="/shopping-conditions">Shopping Conditions</a>
+              <a href="/shopping-conditions">Ketentuan Belanja</a>
             </li>
           </ul>
         </div>
@@ -108,7 +108,7 @@ const Header: FC<HeaderProps> = ({}) => {
               router.push("/auth/signin");
             }}
           >
-            Sign In
+            Masuk
           </Button>
         ) : (
           <SignOutDialog>
@@ -116,7 +116,7 @@ const Header: FC<HeaderProps> = ({}) => {
               className="hidden lg:block text-black bg-transparent border-black focus:text-black focus:bg-transparent active:bg-transparent"
               variant="outline"
             >
-              Sign Out
+              Keluar
             </Button>
           </SignOutDialog>
         )}

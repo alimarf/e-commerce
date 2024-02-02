@@ -85,47 +85,79 @@ const ProductCard: React.FC<propsType> = ({
   };
 
   return (
-    <div className="border border-gray-200 rounded-xl" style={{ height: '550px', display: 'flex', flexDirection: 'column' }}>
+    <div className="border border-gray-200 rounded-xl" style={{ height: '500px', display: 'flex', flexDirection: 'column' }}>
       <div>
         <Image
-          className="border border-gray-200 rounded-xl w-full h-auto"
+          className="border border-gray-200  rounded-xl w-full h-auto"
           src={`/${img}`}
           width={200}
           height={300}
           alt={title}
         />
       </div>
-  
+
       <div className="px-2 space-y-2 py-2 flex-grow">
-        <h2 className="text-black font-medium uppercase">{title}</h2>
-        <p className="text-gray-500 max-w-[150px]">{desc}</p>
+        <h2 className="text-black font-medium text-rose-400">{title}</h2>
+        <p className="text-gray-500 text-xs">{desc}</p>
         <div>{generateRating(rating)}</div>
-  
         <div className="font-bold flex gap-4">
           {formatRupiah(parseInt(price))}
         </div>
       </div>
-  
+
       {session === null ? (
         <Link
           href="/auth/signin"
           className="bg-primary text-white text-[14px] md:text-[16px] p-2 px-4 m-2 rounded-lg inline-block cursor-pointer hover:bg-blackish"
         >
-          Order Now
+          Pesan Sekarang
         </Link>
       ) : (
+        
         <button
           onClick={() => {
             router.push(`/product-detail/${id}`)
           }}
           className="bg-primary text-white text-[14px] md:text-[16px] p-2 px-6 m-2 rounded-lg inline-block cursor-pointer hover:bg-blackish"
         >
-          Order Now
+          Pesan Sekarang
         </button>
       )}
     </div>
+
+
+    // <div className="max-w-sm rounded overflow-hidden shadow-lg">
+    //   <img className="w-full px-2" src={`/${img}`} alt="Sunset in the mountains" />
+    //   <div className="px-3">
+    //     <div className="px-2 space-y-2 py-2 flex-grow">
+    //       <h2 className="text-black font-medium text-rose-400">{title}</h2>
+    //       <p className="text-gray-500 text-xs">{desc}</p>
+    //       <div>{generateRating(rating)}</div>
+    //       <div className="font-bold flex gap-4">
+    //         {formatRupiah(parseInt(price))}
+    //       </div>
+    //     </div>
+    //   </div>
+    //   {session === null ? (
+    //     <Link
+    //       href="/auth/signin"
+    //       className="bg-primary text-white text-[14px] md:text-[16px] p-2 px-4 m-2 rounded-lg inline-block cursor-pointer hover:bg-blackish"
+    //     >
+    //       Pesan Sekarang
+    //     </Link>
+    //   ) : (
+    //     <button
+    //       onClick={() => {
+    //         router.push(`/product-detail/${id}`)
+    //       }}
+    //       className="bg-primary text-white text-[14px] md:text-[16px] p-2 px-6 m-2 rounded-lg inline-block cursor-pointer hover:bg-blackish"
+    //     >
+    //       Pesan Sekarang
+    //     </button>
+    //   )}
+    // </div>
   );
-  
+
 };
 
 export default ProductCard;
