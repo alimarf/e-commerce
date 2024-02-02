@@ -4,7 +4,6 @@ import "../globals.css";
 import Sidebar from "@/components/Sidebar";
 import { Epilogue } from "next/font/google";
 import Header from "@/components/HeaderAdmin";
-import NextAuthProvider from "@/context/NextAuthProvider";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]/route";
 import { redirect } from "next/navigation";
@@ -33,10 +32,6 @@ export default async function RootLayout({
     <html lang="en">
       <body className={epilogue.className}>
         <main>
-          {/* <NextAuthProvider>
-       
-          </NextAuthProvider> */}
-
           <div className="border-t">
             <div className="bg-background">
               <div className="flex flex-row">

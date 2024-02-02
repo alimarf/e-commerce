@@ -31,9 +31,9 @@ const ProductsPage: FC<ProductsPageProps> = ({}) => {
     <div>
       <div className="container mx-auto py-10">
         {error ? (
-          <p>Error loading products</p>
+          <div>Error loading products</div>
         ) : !productsData || !productsData.data ? (
-          <p></p>
+          <div></div>
         ) : (
           <DataTable columns={columns} data={productsData.data} />
         )}
