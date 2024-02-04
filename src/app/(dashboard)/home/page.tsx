@@ -26,7 +26,7 @@ const Home = () => {
   console.log("data", productsData);
 
   return (
-    <div>
+    <div >
       <div className="container mt-5">
         <Carousel autoPlay infiniteLoop showThumbs={false}>
           <div>
