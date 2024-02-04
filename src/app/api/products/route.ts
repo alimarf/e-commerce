@@ -7,7 +7,7 @@ import { zfd } from "zod-form-data";
 import { z } from "zod";
 import { NextApiRequest, NextApiResponse } from "next";
 
-export const headers = {
+const headers = {
   "Content-Type": "application/json",
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
@@ -164,7 +164,7 @@ export async function GET(request: NextRequest) {
       }),
       {
         status: 500,
-        headers: {},
+        headers: headers,
       }
     );
 
@@ -288,7 +288,7 @@ export async function DELETE(request: Request) {
       }),
       {
         status: 500,
-        headers: {},
+        headers: headers
       }
     );
 

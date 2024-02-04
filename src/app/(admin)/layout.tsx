@@ -5,9 +5,10 @@ import Sidebar from "@/components/Sidebar";
 import { Epilogue } from "next/font/google";
 import Header from "@/components/HeaderAdmin";
 import { getServerSession } from "next-auth";
-import { authOptions } from "../api/auth/[...nextauth]/route";
+
 import { redirect } from "next/navigation";
 import NextAuthProvider from "@/context/NextAuthProvider";
+import authOptions from "../api/auth/[...nextauth]/options";
 
 const epilogue = Epilogue({ subsets: ["latin"] });
 

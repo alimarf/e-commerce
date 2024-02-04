@@ -16,7 +16,6 @@ import useSWR from "swr";
 import { fetcher } from "@/lib/utils";
 import { redirect, useRouter } from "next/navigation";
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
 interface ProductsPageProps {}
 
