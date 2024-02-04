@@ -7,6 +7,8 @@ import { zfd } from "zod-form-data";
 import { z } from "zod";
 import { NextApiRequest, NextApiResponse } from "next";
 
+export const dynamic = 'force-dynamic'
+
 const headers = {
   "Content-Type": "application/json",
   "Access-Control-Allow-Origin": "*",
